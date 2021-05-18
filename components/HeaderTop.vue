@@ -1,5 +1,10 @@
 <template>
-  <div id="headerTop">
+  <div
+    v-bind:class="{
+      hiddenHeaderTop: this.$route.path != '/dashboard' ? false : true,
+    }"
+    id="headerTop"
+  >
     <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
 
     <button class="menuButton" id="MenuButton" aria-label="Main Menu">

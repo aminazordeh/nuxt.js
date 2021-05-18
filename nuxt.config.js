@@ -32,6 +32,7 @@ export default {
   plugins: [
     {
       src: './assets/js/script.js',
+      body: true,
       ssr: false,
     },
   ],
