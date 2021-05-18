@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
     <div id="dashboard_index">
-      <div id="topNavbar" class="pr-4">
+      <div id="topNavbar" class="pr-4 animate__animated animate__fadeInDown">
         <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
 
         <div>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </div>
-      <div id="leftBar">
+      <div class="animate__animated animate__fadeInLeft" id="leftBar">
         <div id="leftBarDots">
           <span></span>
           <span></span>
@@ -25,7 +25,45 @@
         </div>
         <nuxt-link to="/"></nuxt-link>
       </div>
-      <div id="dashboard_content"></div>
+      <div id="dashboard_content">
+        <h4
+          class="header header-large text-right w-100 d-block animate__zoomIn"
+        >
+          داشبورد
+        </h4>
+        <div class="mt-3 p-0 flex">
+          <div class="white-box animate__animated animate__zoomIn">
+            <div class="white-box-icon">
+              <box-icon name="home"></box-icon>
+            </div>
+            <div class="white-box-header">باکس سفید</div>
+            <div class="white-box-value">1</div>
+          </div>
+          <div class="white-box mr-xl-3 animate__animated animate__zoomIn">
+            <div class="white-box-icon">
+              <box-icon name="home"></box-icon>
+            </div>
+            <div class="white-box-header">باکس سفید</div>
+            <div class="white-box-value">2</div>
+          </div>
+          <div
+            class="white-box mr-xl-3 ml-xl-3 animate__animated animate__zoomIn"
+          >
+            <div class="white-box-icon">
+              <box-icon name="home"></box-icon>
+            </div>
+            <div class="white-box-header">باکس سفید</div>
+            <div class="white-box-value">3</div>
+          </div>
+          <div class="white-box animate__animated animate__zoomIn">
+            <div class="white-box-icon">
+              <box-icon name="home"></box-icon>
+            </div>
+            <div class="white-box-header">باکس سفید</div>
+            <div class="white-box-value">4</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>

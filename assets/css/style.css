@@ -20,7 +20,7 @@ ul {
   list-style-type: decimal;
 }
 .link {
-  font-size: 14px;
+  font-size: 25px;
   color: #666;
   text-align: right;
   display: block;
@@ -29,7 +29,7 @@ ul {
   margin: 25px 0;
 }
 .link-no-style {
-  font-size: 14px;
+  font-size: 25px;
   color: var(--gen-color);
   direction: rtl;
 }
@@ -37,12 +37,14 @@ ul {
   font-size: 17px;
 }
 .header {
-  font-family: 'Ubuntu', 'Dirooz';
+  font-family: 'Rubik', 'Dirooz';
+  font-weight: 100;
   font-size: 25px;
-  color: #111;
+  color: #161618;
 }
 .header-large {
   font-size: 35px;
+  font-weight: 500;
 }
 #app button,
 .dvsp-button {
@@ -198,6 +200,7 @@ body {
 }
 #logged_user {
   position: relative;
+  user-select: none;
 }
 #logged_user #user_avatar {
   position: relative;
@@ -214,7 +217,8 @@ body {
   position: relative;
   top: -1px;
   padding: 0 10px;
-  font-family: 'Recursive';
+  font-family: 'Noto Sans HK';
+  font-weight: 400;
   color: #777;
   direction: ltr;
 }
@@ -233,13 +237,9 @@ body {
   height: var(--headerTop-heigth);
   background-color: rgba(255, 255, 255, 0.925);
   z-index: 75;
-  transition: top 0.3s ease;
 }
 #headerTop.hiddenHeaderTop {
-  top: calc(
-    var(--headerTop-heigth) - var(--headerTop-heigth) - var(--headerTop-heigth) -
-      100%
-  );
+  display: none;
 }
 #headerTop #headerBrand {
   position: absolute;
@@ -250,6 +250,11 @@ body {
   align-items: center;
   padding: 0 30px;
   font-size: 24px;
+  user-select: none;
+}
+#headerBrand {
+  user-select: none;
+  cursor: pointer;
 }
 #headerTop #headerBrand,
 #headerTop #headerBrand a,
@@ -738,12 +743,12 @@ body {
   bottom: 0;
 }
 #dashboard {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
   top: calc(
     var(--headerTop-heigth) - var(--headerTop-heigth) - var(--headerTop-heigth)
   );
-  background-color: #f5f5fd;
-  min-height: calc(100vh - var(--headerTop-heigth));
 }
 :not(#Navbar) .Navbar-Dropdown .Navbar-Dropdown-Content {
   top: calc(100% - 10px);
@@ -756,7 +761,7 @@ body {
 :root {
   --leftBar-width: 120px;
   --dashboard_content-width: calc(100% - var(--leftBar-width));
-  --topNavbar-heigth: 80px;
+  --topNavbar-heigth: 85px;
 }
 #leftBar {
   position: fixed;
@@ -769,17 +774,23 @@ body {
 #dashboard_content {
   position: relative;
   left: var(--leftBar-width);
-  min-height: 100vh;
   width: var(--dashboard_content-width);
+  padding: 120px 32px;
+}
+#dashboard,
+#dashboard_content {
+  background-color: #f5f5fd;
 }
 #topNavbar {
-  position: relative;
+  position: absolute;
+  top: 0;
   left: var(--leftBar-width);
   width: var(--dashboard_content-width);
   height: var(--topNavbar-heigth);
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  z-index: 40;
 }
 #topNavbar #logged_user_username {
   top: -5px;
@@ -821,4 +832,44 @@ body {
 }
 #leftBarDots span:nth-child(3) {
   background-color: #2aa72a;
+}
+.flex {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: right;
+  flex-direction: row-reverse;
+}
+@media screen and (max-width: 1200px) {
+  #dashboard_content .flex {
+    flex-direction: column-reverse;
+  }
+  #dashboard_content .white-box {
+    margin: 10px 0;
+  }
+}
+.white-box {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 25px;
+  box-shadow: 0px 10px 30px rgba(7, 7, 7, 0.03),
+    0px 30px 50px rgba(7, 7, 7, 0.04);
+  padding: 30px;
+}
+.white-box:first-child,
+.white-box:last-child {
+  margin: 0;
+}
+.white-box .white-box-icon box-icon {
+  --size: 35px;
+  width: var(--size);
+  height: var(--size);
+}
+.white-box .white-box-header {
+  font-family: 'Rubik', 'Samim';
+  padding: 10px 0px;
+}
+.white-box .white-box-value {
+  font-size: 25px;
+  font-family: 'Raleway', 'Dirooz';
 }

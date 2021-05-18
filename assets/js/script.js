@@ -16,7 +16,7 @@ $('.Navbar-Dropdown').hover(
             marginTop: 0,
             opacity: 1,
           },
-          300
+          200
         )
     }
   },
@@ -31,7 +31,7 @@ $('.Navbar-Dropdown').hover(
             opacity: 0,
             marginTop: '-25px',
           },
-          300,
+          200,
           () => {
             $(this).find('.Navbar-Dropdown-Content').css('display', 'none')
           }
@@ -42,6 +42,9 @@ $('.Navbar-Dropdown').hover(
 function toggleMenu() {
   let w = window.innerWidth
   if (w < 1200) {
+    if ($('#Navbar').hasClass('Navbar-MB') == false) {
+      __resize()
+    }
     if ($('#Navbar').css('display') == 'none') {
       $('body').css('overflow-y', 'hidden')
       $('#Navbar')
@@ -56,6 +59,10 @@ function toggleMenu() {
           300
         )
       $('#MenuButton').addClass('opened')
+      $('.Navbar-MB .Navbar-Dropdown-Content')
+        .css('display', 'block')
+        .css('opacity', '1')
+        .css('margin-top', '0')
     } else {
       $('#Navbar').animate(
         {

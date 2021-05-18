@@ -1,6 +1,6 @@
 <template>
   <div id="index">
-    <h2 class="text-center pt-5 pb-5">Hello devsparkle.ir!</h2>
+    <h2 class="text-center w-100 d-block pt-5">Hello devsparkle.ir!</h2>
   </div>
 </template>
 
