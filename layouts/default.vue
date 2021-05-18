@@ -11,6 +11,7 @@
 import HeaderTop from '../components/HeaderTop'
 
 export default {
+  name: 'default',
   components: {
     HeaderTop,
   },

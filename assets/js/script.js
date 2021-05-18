@@ -5,7 +5,7 @@ $(document).ready(function () {
     function () {
       // over
       let w = window.innerWidth
-      if (w > 950) {
+      if (w > 1200) {
         $(this)
           .find('.Navbar-Dropdown-Content')
           .css('display', 'block')
@@ -23,7 +23,7 @@ $(document).ready(function () {
     function () {
       // out
       let w = window.innerWidth
-      if (w > 950) {
+      if (w > 1200) {
         $(this)
           .find('.Navbar-Dropdown-Content')
           .animate(
@@ -41,7 +41,7 @@ $(document).ready(function () {
   )
   function toggleMenu() {
     let w = window.innerWidth
-    if (w < 950) {
+    if (w < 1200) {
       if ($('#Navbar').css('display') == 'none') {
         $('body').css('overflow-y', 'hidden')
         $('#Navbar')
@@ -82,7 +82,7 @@ $(document).ready(function () {
 
   function __resize() {
     let w = window.innerWidth
-    if (w < 949) {
+    if (w < 1199) {
       if ($('#Navbar').hasClass('Navbar-MB') == false) {
         $('#Navbar')
           .addClass('Navbar-MB')

@@ -17,39 +17,64 @@
     </button>
 
     <div class="Navbar" id="Navbar">
-      <div>
-        <nuxt-link to="/Signup" class="dvsp-button">ثبت نام</nuxt-link>
-        <nuxt-link
-          to="/Signin"
-          class="dvsp-button dvsp-button-outline"
-          id="Navbar-Signup-Button"
-          >ورود</nuxt-link
-        >
-      </div>
-      <div>
-        <div id="logged_user"></div>
-      </div>
-
-      <nav>
-        <nuxt-link to="/" class="Navbar-Link">خانه</nuxt-link>
-        <a class="Navbar-Link">پست ها</a>
-        <div class="Navbar-Dropdown">
-          <button class="Navbar-Dropdown-Button">دراپ داون</button>
-          <div class="Navbar-Dropdown-Content">
-            <nuxt-link to="/" class="Navbar-Link">آیتم ۱</nuxt-link>
-            <a class="Navbar-Link">آیتم ۲</a>
-            <a class="Navbar-Link">آیتم ۳</a>
+      <div class="margin-nav">
+        <div class="Navbar-D-I-Block" v-if="this.logged == true">
+          <div class="Navbar-Dropdown pl-0" dir="rtl">
+            <button class="Navbar-Dropdown-Button pl-0">
+              <div id="logged_user">
+                <div class="d-inline-block">
+                  <div id="user_avatar">
+                    <box-icon name="user"></box-icon>
+                  </div>
+                </div>
+                <div class="d-inline-block">
+                  <span id="logged_user_username">[admin] tahadostifam </span>
+                </div>
+              </div>
+            </button>
+            <div class="Navbar-Dropdown-Content">
+              <nuxt-link to="/dashboard" class="Navbar-Link">داشبورد</nuxt-link>
+              <a class="Navbar-Link">تیکت ها</a>
+              <a class="Navbar-Link">خروج از حساب کاربری</a>
+            </div>
           </div>
         </div>
-        <a class="Navbar-Link">ارسال تیکت</a>
-        <a class="Navbar-Link">نویسنده گان</a>
-      </nav>
+        <div class="Navbar-D-I-Block" v-else>
+          <nuxt-link to="/Signup" class="dvsp-button">ثبت نام</nuxt-link>
+          <nuxt-link
+            to="/Signin"
+            class="dvsp-button dvsp-button-outline"
+            id="Navbar-Signup-Button"
+            >ورود</nuxt-link
+          >
+        </div>
+
+        <nav class="Navbar-D-I-Block">
+          <nuxt-link to="/" class="Navbar-Link">خانه</nuxt-link>
+          <a class="Navbar-Link">پست ها</a>
+          <div class="Navbar-Dropdown">
+            <button class="Navbar-Dropdown-Button">دراپ داون</button>
+            <div class="Navbar-Dropdown-Content">
+              <nuxt-link to="/" class="Navbar-Link">آیتم ۱</nuxt-link>
+              <a class="Navbar-Link">آیتم ۲</a>
+              <a class="Navbar-Link">آیتم ۳</a>
+            </div>
+          </div>
+          <a class="Navbar-Link">ارسال تیکت</a>
+          <a class="Navbar-Link">نویسنده گان</a>
+        </nav>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  logged: true,
+  name: 'headerTop',
+  data() {
+    return {
+      logged: true,
+    }
+  },
 }
 </script>

@@ -186,12 +186,37 @@ ul {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
+.d-inline-block {
+  display: inline-block;
+}
 #Navbar-Signup-Button {
   margin-right: 5px;
   margin-left: 10px;
 }
 body {
   background: #fff;
+}
+#logged_user {
+  position: relative;
+}
+#logged_user #user_avatar {
+  position: relative;
+  top: 4px;
+  width: 40px;
+  height: 40px;
+  background-color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+#logged_user_username {
+  position: relative;
+  top: -1px;
+  padding: 0 10px;
+  font-family: 'Recursive';
+  color: #777;
+  direction: ltr;
 }
 #router-view {
   position: absolute;
@@ -280,7 +305,7 @@ body {
   position: absolute;
   top: calc(100% + 0px);
   right: 23px;
-  min-width: 180px;
+  min-width: 200px;
   background-color: rgba(255, 255, 255);
   border-radius: 15px;
   border-top-right-radius: 0;
@@ -309,14 +334,17 @@ body {
   padding-right: 25px;
 }
 #headerTop
+  .Navbar
   .Navbar-Dropdown
   .Navbar-Dropdown-Content
   .Navbar-Link.Navbar-Link-Active::after,
 #headerTop
+  .Navbar
   .Navbar-Dropdown
   .Navbar-Dropdown-Content
   .Navbar-Link:not(.dvsp-button)[aria-current='page']::after,
 #headerTop
+  .Navbar
   .Navbar-Dropdown
   .Navbar-Dropdown-Content
   .Navbar-Link:not(.dvsp-button).nuxt-link-exact-active::after {
@@ -332,6 +360,7 @@ body {
   box-shadow: 0px 0px 10px var(--gen-color);
   border-radius: 50px;
 }
+
 #headerTop
   .Navbar-Dropdown
   .Navbar-Dropdown-Content
@@ -383,7 +412,10 @@ body {
 
   overflow-y: scroll;
 }
-.Navbar-MB .dvsp-button:first-child {
+.Navbar .Navbar-D-I-Block {
+  display: inline-block;
+}
+.Navbar-MB .margin-nav {
   margin-top: 90px;
 }
 .Navbar-MB nav {
@@ -457,7 +489,7 @@ body {
 
   display: none;
 }
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1200px) {
   #headerTop .Navbar {
     display: none;
   }
