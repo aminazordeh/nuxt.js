@@ -1,8 +1,10 @@
 <template>
   <div id="posts">
-    <div id="posts_container">
+    <div id="posts_container" class="pb-5 mb-5">
       <div class="post-box" v-for="item in posts_test_count">
-        <img src="http://picsum.photos/700/400" class="post-cover-img" />
+        <div class="img-loader">
+          <img src="http://picsum.photos/700/400" class="post-cover-img" />
+        </div>
         <h2 class="post-header">
           آموزش ساخت یک وب سرور ساده با Flask در پایتون
         </h2>
@@ -20,7 +22,9 @@
           پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
         </p>
         <div class="post-read-more">
-          <a href="" class="dvsp-button">ادامه مطلب</a>
+          <nuxt-link to="/posts/Hello-World" class="dvsp-button"
+            >ادامه مطلب</nuxt-link
+          >
         </div>
       </div>
     </div>

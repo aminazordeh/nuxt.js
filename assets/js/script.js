@@ -45,7 +45,7 @@ function toggleMenu() {
       __resize()
     }
     if ($('#Navbar').css('display') == 'none') {
-      $('body').css('overflow-y', 'hidden')
+      $(window).css('overflow-y', 'hidden')
       $('#Navbar')
         .css('display', 'block')
         .css('margin-left', '-100%')
@@ -71,7 +71,7 @@ function toggleMenu() {
         300,
         () => {
           $('#Navbar').css('display', 'none')
-          $('body').css('overflow-y', 'visible')
+          $(window).css('overflow-y', 'visible')
         }
       )
       $('#MenuButton').removeClass('opened')
@@ -107,7 +107,7 @@ function __resize() {
         .css('margin-left', '0')
         .css('opacity', '1')
       $('#MenuButton').removeClass('opened')
-      $('body').css('overflow-y', 'visible')
+      $(window).css('overflow-y', 'visible')
       $('.Navbar .Navbar-Dropdown-Content').css('display', 'none')
     }
   }

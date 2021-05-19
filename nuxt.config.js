@@ -12,9 +12,7 @@ export default {
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [
-      { src: 'https://unpkg.com/boxicons@latest/dist/boxicons.js', body: true },
-    ],
+    script: [],
   },
 
   css: [

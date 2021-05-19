@@ -159,6 +159,25 @@ ul {
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.like-button svg {
+  width: 30px;
+}
+.like-button {
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  width: 45px;
+  height: 30px;
+  padding: 3px 0;
+  border-radius: 5px;
+  fill: #111;
+  color: #111;
+  margin: 0;
+}
+.like-button.liked {
+  fill: rgb(255, 0, 43);
+  color: rgb(255, 0, 43);
+}
 .dvsp-button {
   cursor: pointer;
   padding: 8px 30px;
@@ -189,6 +208,15 @@ ul {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
+.dvsp-button.dvsp-button-icon {
+  border-radius: 50px;
+  width: 40px;
+  height: 40px;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #ccc;
+  border-color: #ccc;
+}
 .d-inline-block {
   display: inline-block;
 }
@@ -213,6 +241,9 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+}
+#logged_user #user_avatar ion-icon {
+  font-size: 20px;
 }
 #logged_user_username {
   position: relative;
@@ -912,10 +943,9 @@ body {
   opacity: 1;
   height: 100%;
 }
-#leftBarNavbar .leftBarNavbar-Item box-icon {
+#leftBarNavbar .leftBarNavbar-Item svg {
   --size: 26px;
   width: var(--size);
-  height: var(--size);
 }
 #posts_container {
   position: absolute;
@@ -924,19 +954,26 @@ body {
   width: 90%;
   display: grid;
   grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
-  grid-column-gap: 30px;
+  grid-column-gap: 10px;
   margin-top: 40px;
-  margin-bottom: 60px;
   justify-content: end;
+}
+@media screen and (max-width: 1300px) {
+  #posts_container {
+    grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+    grid-column-gap: 10px;
+  }
+}
+@media screen and (max-width: 850px) {
+  #posts_container {
+    grid-template-columns: 100%;
+    grid-column-gap: 0px;
+  }
 }
 .post-box {
   width: 100%;
   text-align: right;
   direction: rtl;
-}
-.post-box .post-cover-img {
-  width: 100%;
-  border-radius: 5px;
 }
 .post-box .post-header {
   font-family: 'Ubuntu', 'Dirooz';
@@ -953,4 +990,9 @@ body {
   display: block;
   text-align: left;
   padding: 15px 0;
+}
+.post-box .post-cover-img,
+.img-loader {
+  width: 100%;
+  border-radius: 5px;
 }
