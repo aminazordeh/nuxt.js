@@ -7,6 +7,7 @@
 html,
 body {
   min-height: 100vh;
+  overflow-x: hidden;
 }
 :root {
   --headerTop-heigth: 85px;
@@ -759,7 +760,7 @@ body {
   z-index: -1;
 }
 :root {
-  --leftBar-width: 120px;
+  --leftBar-width: 100px;
   --dashboard_content-width: calc(100% - var(--leftBar-width));
   --topNavbar-heigth: 85px;
 }
@@ -850,7 +851,7 @@ body {
 }
 .white-box {
   width: 100%;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 25px;
   box-shadow: 0px 10px 30px rgba(7, 7, 7, 0.03),
     0px 30px 50px rgba(7, 7, 7, 0.04);
@@ -872,4 +873,84 @@ body {
 .white-box .white-box-value {
   font-size: 25px;
   font-family: 'Raleway', 'Dirooz';
+}
+#leftBarNavbar {
+  width: 100%;
+  padding: 30px 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  flex-direction: column;
+}
+#leftBarNavbar .leftBarNavbar-Item {
+  position: relative;
+  width: 100%;
+  margin: 23px 0;
+  padding: 10px 0;
+  fill: #a8a9ad;
+  color: #a8a9ad;
+}
+#leftBarNavbar .leftBarNavbar-Item.nuxt-link-exact-active {
+  fill: #333;
+  color: #333;
+}
+#leftBarNavbar .leftBarNavbar-Item::after {
+  position: absolute;
+  display: block;
+  content: '';
+  width: 2px;
+  height: 100%;
+  background-color: #333;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  height: 0;
+  transition: 0.4s ease-out;
+}
+#leftBarNavbar .leftBarNavbar-Item.nuxt-link-exact-active::after {
+  opacity: 1;
+  height: 100%;
+}
+#leftBarNavbar .leftBarNavbar-Item box-icon {
+  --size: 26px;
+  width: var(--size);
+  height: var(--size);
+}
+#posts_container {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 90%;
+  display: grid;
+  grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
+  grid-column-gap: 30px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  justify-content: end;
+}
+.post-box {
+  width: 100%;
+  text-align: right;
+  direction: rtl;
+}
+.post-box .post-cover-img {
+  width: 100%;
+  border-radius: 5px;
+}
+.post-box .post-header {
+  font-family: 'Ubuntu', 'Dirooz';
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+.post-description {
+  color: #555;
+  font-family: 'Quicksand', 'Samim';
+  font-weight: 200;
+}
+.post-read-more {
+  width: 100%;
+  display: block;
+  text-align: left;
+  padding: 15px 0;
 }

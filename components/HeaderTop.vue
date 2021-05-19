@@ -1,9 +1,11 @@
 <template>
   <div
     v-bind:class="{
-      hiddenHeaderTop: this.$route.path != '/dashboard' ? false : true,
+      hiddenHeaderTop:
+        String(this.$route.path).includes('dashboard') == false ? false : true,
     }"
     id="headerTop"
+    class="animate__animated animate__flipInX"
   >
     <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
 
@@ -56,7 +58,7 @@
 
         <nav class="Navbar-D-I-Block">
           <nuxt-link to="/" class="Navbar-Link">خانه</nuxt-link>
-          <a class="Navbar-Link">پست ها</a>
+          <nuxt-link to="/posts" class="Navbar-Link">پست ها</nuxt-link>
           <div class="Navbar-Dropdown">
             <button class="Navbar-Dropdown-Button">دراپ داون</button>
             <div class="Navbar-Dropdown-Content">

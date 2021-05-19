@@ -103,6 +103,7 @@ export default {
       this.$route.params.section == '' ||
       this.$route.params.section == undefined
     ) {
+      this.$nuxt.$options.router.push('/dashboard/home')
     }
   },
 }

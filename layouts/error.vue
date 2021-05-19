@@ -1,26 +1,24 @@
 <template>
-  <v-app dark>
-    <h1 v-if="error.statusCode === 404">
-      <pageNotFound :error="otherError"></pageNotFound>
-    </h1>
+  <h1 v-if="error.statusCode === 404">
+    <pageNotFound :error="otherError"></pageNotFound>
+  </h1>
+  <div
+    v-else
+    id="pageNotFound"
+    style="overflow: hidden; min-heigth: calc(100% - var(--headerTop-heigth))"
+  >
     <div
-      v-else
-      id="pageNotFound"
-      style="overflow: hidden; min-heigth: calc(100% - var(--headerTop-heigth))"
+      style="position: relative"
+      class="animate__animated animate__swing center-abs"
     >
-      <div
-        style="position: relative"
-        class="animate__animated animate__swing center-abs"
-      >
-        <img
-          class="full-svg"
-          :src="require('../assets/images/undraw_server_down_s4lk.svg')"
-          alt="an rrror has occurred"
-        />
-        <span class="full-svg-text">خطایی رخ داده ست.</span>
-      </div>
+      <img
+        class="full-svg"
+        :src="require('../assets/images/undraw_server_down_s4lk.svg')"
+        alt="an rrror has occurred"
+      />
+      <span class="full-svg-text">خطایی رخ داده ست.</span>
     </div>
-  </v-app>
+  </div>
 </template>
 
 <script>

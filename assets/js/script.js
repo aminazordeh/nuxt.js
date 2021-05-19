@@ -1,9 +1,8 @@
 import $, { css } from 'jquery'
 
-$('.Navbar-Dropdown').hover(
+$('.Navbar-Dropdown, .Navbar-Dropdown *').hover(
   function () {
     // over
-    console.log('DD Hover')
     let w = window.innerWidth
     if (w > 1200) {
       $(this)
