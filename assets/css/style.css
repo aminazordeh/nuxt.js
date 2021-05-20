@@ -8,6 +8,8 @@ html,
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 :root {
   --headerTop-heigth: 85px;
@@ -166,9 +168,8 @@ ul {
   cursor: pointer;
   border: none;
   background-color: transparent;
-  width: 45px;
-  height: 30px;
-  padding: 3px 0;
+  height: 35px;
+  padding: 4px 0;
   border-radius: 5px;
   fill: #111;
   color: #111;
@@ -230,6 +231,10 @@ body {
 #logged_user {
   position: relative;
   user-select: none;
+}
+#logged_user #user_avatar svg {
+  fill: rgb(184, 184, 184);
+  color: rgb(184, 184, 184);
 }
 #logged_user #user_avatar {
   position: relative;
@@ -892,8 +897,8 @@ body {
 .white-box:last-child {
   margin: 0;
 }
-.white-box .white-box-icon box-icon {
-  --size: 35px;
+.white-box .white-box-icon svg {
+  --size: 33px;
   width: var(--size);
   height: var(--size);
 }
@@ -995,4 +1000,16 @@ body {
 .img-loader {
   width: 100%;
   border-radius: 5px;
+}
+.img-loader {
+  height: 250px;
+  overflow: hidden;
+  background-color: rgb(230, 230, 230);
+}
+.img-loader img {
+  opacity: 0;
+  transition: 0.3s ease;
+}
+.img-loader img.loaded {
+  opacity: 1;
 }

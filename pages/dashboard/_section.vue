@@ -8,7 +8,29 @@
           <div id="logged_user" dir="rtl">
             <div class="d-inline-block">
               <div id="user_avatar">
-                <box-icon name="user"></box-icon>
+                <svg
+                  style="width: 24px"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="ionicon"
+                  viewBox="0 0 512 512"
+                >
+                  <title>Person</title>
+                  <path
+                    d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="32"
+                  />
+                  <path
+                    d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-miterlimit="10"
+                    stroke-width="32"
+                  />
+                </svg>
               </div>
             </div>
             <div class="d-inline-block">
@@ -159,14 +181,42 @@
         <div class="mt-3 p-0 flex">
           <div class="white-box animate__animated animate__zoomIn">
             <div class="white-box-icon">
-              <box-icon name="home"></box-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Book</title>
+                <path
+                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
             </div>
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">1</div>
           </div>
           <div class="white-box mr-xl-3 animate__animated animate__zoomIn">
             <div class="white-box-icon">
-              <box-icon name="home"></box-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Book</title>
+                <path
+                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
             </div>
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">2</div>
@@ -175,14 +225,42 @@
             class="white-box mr-xl-3 ml-xl-3 animate__animated animate__zoomIn"
           >
             <div class="white-box-icon">
-              <box-icon name="home"></box-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Book</title>
+                <path
+                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
             </div>
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">3</div>
           </div>
           <div class="white-box animate__animated animate__zoomIn">
             <div class="white-box-icon">
-              <box-icon name="home"></box-icon>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Book</title>
+                <path
+                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                />
+              </svg>
             </div>
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">4</div>

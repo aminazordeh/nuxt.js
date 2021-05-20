@@ -45,6 +45,7 @@ function toggleMenu() {
       __resize()
     }
     if ($('#Navbar').css('display') == 'none') {
+      // Open Menu
       $(window).css('overflow-y', 'hidden')
       $('#Navbar')
         .css('display', 'block')
@@ -61,8 +62,9 @@ function toggleMenu() {
       $('.Navbar-MB .Navbar-Dropdown-Content')
         .css('display', 'block')
         .css('opacity', '1')
-        .css('margin-top', '0')
+        .css('margin-top', '10px')
     } else {
+      // Close Menu
       $('#Navbar').animate(
         {
           opacity: 0,
@@ -96,7 +98,6 @@ function __resize() {
         .css('display', 'none')
       $('.Navbar .Navbar-Dropdown-Content').css('display', 'block')
       $('.Navbar .Navbar-Dropdown-Content').css('opacity', '1')
-      $('.Navbar .Navbar-Dropdown-Content').css('margin-top', '100%')
     }
   } else {
     if ($('#Navbar').hasClass('Navbar-MB') == true) {

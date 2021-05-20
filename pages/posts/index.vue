@@ -3,7 +3,12 @@
     <div id="posts_container" class="pb-5 mb-5">
       <div class="post-box" v-for="item in posts_test_count">
         <div class="img-loader">
-          <img src="http://picsum.photos/700/400" class="post-cover-img" />
+          <img
+            src="http://picsum.photos/700/400"
+            alt="post cover image"
+            class="post-cover-img"
+            onload="this.classList.add('loaded')"
+          />
         </div>
         <h2 class="post-header">
           آموزش ساخت یک وب سرور ساده با Flask در پایتون
