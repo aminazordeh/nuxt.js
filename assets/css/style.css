@@ -819,7 +819,7 @@ body {
   background-color: #f5f5fd;
 }
 #topNavbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: var(--leftBar-width);
   width: var(--dashboard_content-width);
@@ -828,6 +828,8 @@ body {
   align-items: center;
   justify-content: flex-end;
   z-index: 40;
+
+  background-color: #f5f5fdf3;
 }
 #topNavbar #logged_user_username {
   top: -5px;
@@ -963,6 +965,43 @@ body {
   margin-top: 40px;
   justify-content: end;
 }
+#toggleLeftBarButton {
+  display: none;
+}
+@media screen and (max-width: 700px) {
+  #leftBar {
+    display: none;
+  }
+  #dashboard_content {
+    width: 100%;
+    left: 0;
+  }
+  #topNavbar {
+    left: 0;
+    width: 100%;
+  }
+  #topNavbar #logged_user {
+    display: none;
+  }
+  #topNavbar #headerBrand a {
+    font-size: 20px;
+  }
+  #toggleLeftBarButton {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 22px;
+    width: 50px;
+    height: 50px;
+    z-index: 50;
+    display: block;
+  }
+  #toggleLeftBarButton svg {
+    --size: 90%;
+    width: var(--size);
+    height: var(--size);
+  }
+}
 @media screen and (max-width: 1300px) {
   #posts_container {
     grid-template-columns: calc(50% - 10px) calc(50% - 10px);
@@ -1007,6 +1046,8 @@ body {
   background-color: rgb(230, 230, 230);
 }
 .img-loader img {
+  width: auto;
+  height: 100%;
   opacity: 0;
   transition: 0.3s ease;
 }
