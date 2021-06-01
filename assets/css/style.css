@@ -23,7 +23,7 @@ ul {
   list-style-type: decimal;
 }
 .link {
-  font-size: 25px;
+  font-size: 15px;
   color: #666;
   text-align: right;
   display: block;
@@ -31,8 +31,14 @@ ul {
   direction: rtl;
   margin: 25px 0;
 }
+.link.red {
+  color: rgb(255, 0, 21);
+}
+.link.primary {
+  color: rgb(5, 98, 219);
+}
 .link-no-style {
-  font-size: 25px;
+  font-size: 15px;
   color: var(--gen-color);
   direction: rtl;
 }
@@ -553,7 +559,7 @@ body {
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translate(0, -50%) scale(0.7);
+  transform: translate(0, -50%) scale(0.6);
   z-index: 83;
 
   display: none;
@@ -808,18 +814,35 @@ body {
   width: var(--leftBar-width);
   background-color: #ececf6;
 }
+#leftBar::-webkit-scrollbar {
+  width: 3px;
+}
+#leftBar::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+#leftBar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+#leftBar::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+@media only screen and (min-width: 720px) {
+  #leftBar {
+    overflow-y: scroll;
+  }
+}
 #dashboard_content {
   position: relative;
   left: var(--leftBar-width);
   width: var(--dashboard_content-width);
-  padding: 120px 32px;
+  padding: 40px 25px;
 }
 #dashboard,
 #dashboard_content {
   background-color: #f5f5fd;
 }
 #topNavbar {
-  position: fixed;
+  position: relative;
   top: 0;
   left: var(--leftBar-width);
   width: var(--dashboard_content-width);
@@ -965,41 +988,68 @@ body {
   margin-top: 40px;
   justify-content: end;
 }
-#toggleLeftBarButton {
-  display: none;
-}
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 720px) {
   #leftBar {
+    position: relative;
+    z-index: 20;
+    width: 100%;
+    height: 90px;
+  }
+  #leftBar #leftBarDots {
     display: none;
+  }
+  #leftBar #leftBarNavbar {
+    flex-direction: row;
+    padding: 0 15px;
+    margin-top: 10px;
   }
   #dashboard_content {
     width: 100%;
     left: 0;
   }
+  #leftBar #leftBarNavbar .leftBarNavbar-Item::after {
+    top: auto;
+    bottom: 0;
+    width: 28%;
+    height: 2px;
+    right: 50%;
+    transform: translate(50%);
+  }
   #topNavbar {
     left: 0;
+    right: 0;
     width: 100%;
   }
   #topNavbar #logged_user {
+    position: absolute;
+    top: 48px;
+    right: 50%;
+    transform: translate(50%);
+    padding: 10px 0;
+    padding-left: 22px;
+    margin: 0;
+  }
+  #topNavbar #logged_user > .d-inline-block:nth-child(1) {
     display: none;
   }
+  #topNavbar #headerBrand {
+    width: 100%;
+    height: 30%;
+    left: 50%;
+    top: 0px;
+    transform: translate(-50%);
+    padding: 30px 0;
+
+    padding-left: 22px;
+  }
   #topNavbar #headerBrand a {
-    font-size: 20px;
-  }
-  #toggleLeftBarButton {
-    cursor: pointer;
-    position: absolute;
-    right: 10px;
-    top: 22px;
-    width: 50px;
-    height: 50px;
-    z-index: 50;
-    display: block;
-  }
-  #toggleLeftBarButton svg {
-    --size: 90%;
-    width: var(--size);
-    height: var(--size);
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 26px;
   }
 }
 @media screen and (max-width: 1300px) {

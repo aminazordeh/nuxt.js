@@ -1,4 +1,4 @@
-import $, { css } from 'jquery'
+import * as $ from 'jquery'
 
 $('.Navbar-Dropdown, .Navbar-Dropdown *').hover(
   function () {

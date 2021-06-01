@@ -25,7 +25,12 @@
 
     <div class="Navbar" id="Navbar">
       <div class="margin-nav">
-        <div class="Navbar-D-I-Block" v-if="this.logged == true">
+        <div
+          class="Navbar-D-I-Block"
+          v-bind:style="[
+            logged ? { display: 'inline-block' } : { display: 'none' },
+          ]"
+        >
           <div class="Navbar-Dropdown pl-0" dir="rtl">
             <button class="Navbar-Dropdown-Button pl-0">
               <div id="logged_user">
@@ -64,11 +69,18 @@
             <div class="Navbar-Dropdown-Content">
               <nuxt-link to="/dashboard" class="Navbar-Link">داشبورد</nuxt-link>
               <a class="Navbar-Link">تیکت ها</a>
-              <a class="Navbar-Link">خروج از حساب کاربری</a>
+              <a @click="logout_user" class="Navbar-Link"
+                >خروج از حساب کاربری</a
+              >
             </div>
           </div>
         </div>
-        <div class="Navbar-D-I-Block" v-else>
+        <div
+          class="Navbar-D-I-Block"
+          v-bind:style="[
+            logged ? { display: 'none' } : { display: 'inline-block' },
+          ]"
+        >
           <nuxt-link to="/Signup" class="dvsp-button">ثبت نام</nuxt-link>
           <nuxt-link
             to="/Signin"
@@ -100,10 +112,42 @@
 <script>
 export default {
   name: 'headerTop',
+  mounted() {
+    this.getUserState()
+  },
   data() {
     return {
-      logged: true,
+      logged: false,
     }
+  },
+  methods: {
+    getUserState() {
+      if (
+        this.$store.state.user.email != '' &&
+        this.$store.state.user.password != '' &&
+        this.$store.state.user.email != undefined &&
+        this.$store.state.user.password != undefined &&
+        this.$store.state.user.email != null &&
+        this.$store.state.user.password != null
+      ) {
+        this.$data.logged = true
+      } else {
+        this.$data.logged = false
+      }
+      require('../assets/js/script')
+    },
+    logout_user() {
+      this.$store.commit('setUser', {
+        email: '',
+        password: '',
+        token: '',
+        remember_me: false,
+      })
+      this.$set(this.$data, 'logged', false)
+    },
+  },
+  watch: {
+    '$store.state.user.email': 'getUserState',
   },
 }
 </script>

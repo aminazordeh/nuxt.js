@@ -27,7 +27,7 @@
 
         <div class="input-checkbox">
           <label class="pt cont">
-            <span dir="rtl"
+            <span dir="rtl" style="font-weight: bold"
               ><nuxt-link class="link-no-style" to="/terms_and_conditions"
                 >قوانین و مقررات</nuxt-link
               >
@@ -46,7 +46,7 @@
         </div>
 
         <div style="margin-top: 15px; margin-bottom: 18px">
-          <button class="dvsp-button">ثبت نام</button>
+          <button @click="signin_submit" class="dvsp-button">ثبت نام</button>
         </div>
 
         <hr class="circle-hr" />
@@ -67,7 +67,9 @@ export default {
     return {}
   },
   methods: {
-    signin_submit() {},
+    signin_submit() {
+      alert('Hello World')
+    },
   },
   components: {
     VueRecaptcha,

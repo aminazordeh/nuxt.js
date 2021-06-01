@@ -32,6 +32,7 @@ export default {
       src: './assets/js/script.js',
       body: true,
       ssr: false,
+      defer: true,
     },
   ],
 
@@ -39,6 +40,50 @@ export default {
 
   pwa: {
     manifest: {
+      name: 'devsparkle',
+      short_name: 'devsparkle',
+      theme_color: '#fff',
+      background_color: '#fff',
+      version: '1.0',
+      author: 'Taha Dostifam',
+      description: 'وبلاگ آموزش برنامه نویسی devsparkle',
+      icons: [
+        {
+          src: './static/icons/60.png',
+          type: 'image/png',
+          sizes: '60x60',
+        },
+        {
+          src: './static/icons/120.png',
+          type: 'image/png',
+          sizes: '120x120',
+        },
+        {
+          src: './static/icons/144 .png',
+          type: 'image/png',
+          sizes: '144x144',
+        },
+        {
+          src: './static/icons/152.png',
+          type: 'image/png',
+          sizes: '152x152',
+        },
+        {
+          src: './static/icons/192.png',
+          type: 'image/png',
+          sizes: '192x192',
+        },
+        {
+          src: './static/icons/384.png',
+          type: 'image/png',
+          sizes: '384x384',
+        },
+        {
+          src: './static/icons/512.png',
+          type: 'image/png',
+          sizes: '512x512',
+        },
+      ],
       lang: 'fa',
     },
   },
