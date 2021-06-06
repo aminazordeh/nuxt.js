@@ -95,6 +95,12 @@ ul {
   margin-bottom: 5px;
   transition: 0.4s ease;
 }
+.input.border-input {
+  border-radius: 30px;
+  height: 50px;
+  font-size: 15px;
+  font-family: 'Roboto', 'Vazir';
+}
 .input-label {
   position: relative;
   left: 50%;
@@ -307,7 +313,7 @@ body {
 #headerTop .Navbar {
   padding: 0 30px;
   position: absolute;
-  top: -6px;
+  top: 0px;
   right: 0;
   height: 100%;
   display: flex;
@@ -573,6 +579,9 @@ body {
   }
   #Navbar-Signup-Button {
     margin: 0;
+  }
+  .Navbar-D-I-Block {
+    width: 100%;
   }
 }
 
@@ -1103,4 +1112,51 @@ body {
 }
 .img-loader img.loaded {
   opacity: 1;
+}
+.search-bar {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  display: block;
+  width: 90%;
+  background-color: rgb(241, 241, 241);
+  border-radius: 50px;
+  height: 50px;
+}
+.search-bar input,
+.search-bar .input {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: calc(100% - 55px);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.search-bar .search-bar-go {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 0 14px;
+  padding-right: 8px;
+  padding-top: 3px;
+  width: 55px;
+  height: auto;
+  border-bottom-left-radius: 50px;
+  border-top-left-radius: 50px;
+  background-color: rgb(241, 241, 241);
+  border: none;
+  outline: none;
+  color: #777;
+  cursor: pointer;
+  z-index: 20;
+}
+.search-bar .search-bar-go,
+.search-bar .input {
+  transition: 0.3s ease;
+}
+.search-bar:focus > .search-bar-go,
+.search-bar:focus > .search-bar .input,
+.search-bar .input:focus ~ .search-bar-go,
+.search-bar .search-bar-go ~ .search-bar .input {
+  background-color: rgb(231, 231, 231);
 }

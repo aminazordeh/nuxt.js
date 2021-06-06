@@ -118,7 +118,7 @@ export default {
                         token: response.data.token,
                         remember_me: this.$data.remember_me,
                       })
-                      this.$nuxt.$options.router.push('/dashboard/home')
+                      this.$nuxt.$options.router.push('/')
                       return
                     } else {
                       vmdata.alert._text = 'خطا در احراز هویت!'
