@@ -47,7 +47,7 @@ ul {
 }
 .header {
   font-family: 'Rubik', 'Dirooz';
-  font-weight: 100;
+  font-weight: 500;
   font-size: 25px;
   color: #161618;
 }
@@ -58,6 +58,15 @@ ul {
 #app button,
 .dvsp-button {
   font-family: 'Ubuntu', 'Dirooz';
+  cursor: pointer;
+}
+#app button:disabled,
+.dvsp-button:disabled {
+  cursor: default;
+}
+.button-with-spinner {
+  position: relative;
+  overflow: hidden;
 }
 .center-flex {
   display: flex;
@@ -206,6 +215,9 @@ ul {
 .dvsp-button:hover {
   background-color: var(--gen-color-medium-opacity);
 }
+.dvsp-button:disabled:hover {
+  background-color: var(--gen-color);
+}
 .dvsp-button.dvsp-button-outline {
   background-color: transparent;
   color: var(--gen-color);
@@ -328,6 +340,7 @@ body {
 #headerTop a:not(.dvsp-button)[aria-current='page'],
 #headerTop a:not(.dvsp-button).nuxt-link-exact-active {
   color: vaR(--gen-color);
+  font-weight: bold;
 }
 
 #headerTop .Navbar-Link.Navbar-Link-Active::after,
@@ -342,7 +355,6 @@ body {
   right: 50%;
   transform: translate(50%);
   border-radius: 300px;
-  box-shadow: 0 0 25px 2px var(--gen-color-medium-opacity);
   background-color: var(--gen-color);
 }
 #headerTop #headerBrand a::after {
@@ -992,8 +1004,8 @@ body {
   transform: translate(-50%);
   width: 90%;
   display: grid;
-  grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
-  grid-column-gap: 10px;
+  grid-template-columns: calc(33% - 0px) calc(33% - 15px) calc(33% - 15px);
+  grid-column-gap: 15px;
   margin-top: 40px;
   justify-content: end;
 }
@@ -1086,7 +1098,7 @@ body {
 .post-description {
   color: #555;
   font-family: 'Quicksand', 'Samim';
-  font-weight: 200;
+  font-weight: 500;
 }
 .post-read-more {
   width: 100%;
@@ -1105,8 +1117,13 @@ body {
   background-color: rgb(230, 230, 230);
 }
 .img-loader img {
-  width: auto;
-  height: 100%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  min-height: 100%;
+  height: auto;
   opacity: 0;
   transition: 0.3s ease;
 }
@@ -1159,4 +1176,36 @@ body {
 .search-bar .input:focus ~ .search-bar-go,
 .search-bar .search-bar-go ~ .search-bar .input {
   background-color: rgb(231, 231, 231);
+}
+.button_loading_state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background-color: var(--gen-color);
+}
+.button_loading_state::after {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  content: '';
+  display: block;
+  border: 3px solid transparent;
+  border-radius: 50px;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
