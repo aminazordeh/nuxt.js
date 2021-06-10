@@ -76,7 +76,7 @@
           </div>
         </div>
         <div
-          class="Navbar-D-I-Block"
+          class="Navbar-D-I-Block Navbar-Right"
           v-bind:style="[
             logged ? { display: 'none' } : { display: 'inline-block' },
           ]"

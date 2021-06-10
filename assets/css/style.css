@@ -323,16 +323,26 @@ body {
   color: var(--gen-color);
 }
 #headerTop .Navbar {
-  padding: 0 30px;
   position: absolute;
+  padding: 0 10px;
+  padding-right: 200px;
   top: 0px;
   right: 0;
+  left: 220px;
   height: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   direction: rtl;
 }
-
+#headerTop .Navbar .Navbar-Right {
+  position: absolute;
+  right: 10px;
+  height: 100%;
+  justify-content: flex-start;
+  padding: 0 10px;
+  padding-top: 25px;
+}
 #headerTop .Navbar-Link.Navbar-Link-Active {
   color: var(--gen-color);
 }
