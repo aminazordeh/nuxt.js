@@ -1,5 +1,5 @@
 <template>
-  <div id="signin">
+  <div id="signup">
     <template v-if="!verify_your_email_page_show">
       <div class="form">
         <img
@@ -11,19 +11,42 @@
           <h3 class="form-title">ثبت نام</h3>
           <div>
             <label class="input-label">ایمیل شما</label>
-            <input v-model="email" class="input" type="email" required />
+            <input
+              v-model="email"
+              name="signup_email"
+              class="input"
+              type="email"
+              required
+            />
           </div>
           <div>
             <label class="input-label">نام کامل شما</label>
-            <input v-model="full_name" class="input" type="text" required />
+            <input
+              v-model="full_name"
+              class="input"
+              type="text"
+              required
+              minlength="4"
+              maxlength="12"
+            />
           </div>
           <div>
             <label class="input-label">گذرواژه</label>
-            <input v-model="password" class="input" type="password" required />
+            <input
+              minlength="4"
+              maxlength="20"
+              v-model="password"
+              name="signup_password"
+              class="input"
+              type="password"
+              required
+            />
           </div>
           <div>
             <label class="input-label">تکرار گذرواژه</label>
             <input
+              minlength="4"
+              maxlength="20"
               v-model="password_repeat"
               class="input"
               type="password"
@@ -48,7 +71,7 @@
             </label>
           </div>
 
-          <div style="margin-top: 25px">
+          <div style="margin-top: 25px" class="g_recaptcha">
             <VueRecaptcha
               :sitekey="google_recaptcha_sitekey"
               :loadRecaptchaScript="true"
@@ -57,7 +80,17 @@
           </div>
 
           <div style="margin-top: 15px; margin-bottom: 18px">
-            <button @click="signin_submit" class="dvsp-button">ثبت نام</button>
+            <button
+              :disabled="submit_button_loading_sate"
+              @click="signup_submit"
+              class="dvsp-button button-with-spinner"
+            >
+              ثبت نام
+              <div
+                class="button_loading_state"
+                v-if="submit_button_loading_sate"
+              ></div>
+            </button>
           </div>
 
           <hr class="circle-hr" />
@@ -138,20 +171,20 @@ export default {
       password_repeat: '',
       accept_terms_and_conditions: false,
       verify_your_email_page_show: false,
+      submit_button_loading_sate: false,
     }
   },
   methods: {
     recaptchaVerified(recaptchaToken) {
       this.$data.google_recaptcha_token = recaptchaToken
+      window.grecaptcha.reset(0)
     },
     set_alert_data(text) {
       this.$set(this.$data.alert, '_text', text)
     },
-    signin_submit() {
-      if (
-        this.$data.google_recaptcha_token != '' &&
-        this.$data.google_recaptcha_token != undefined
-      ) {
+    signup_submit() {
+      this.$data.submit_button_loading_sate = true
+      let delay = setInterval(async () => {
         if (
           this.$data.email.trim() != '' &&
           this.$data.email.trim() != undefined &&
@@ -170,82 +203,126 @@ export default {
               String(this.$data.password).trim() ==
               String(this.$data.password_repeat).trim()
             ) {
-              axios
-                .post(configs.api_server_address + '/users/signup', {
-                  email: this.$data.email,
-                  password: this.$data.password,
-                  full_name: this.$data.full_name,
-                })
-                .then((response) => {
-                  switch (response.data.code) {
-                    case 200:
-                      axios
-                        .post(
-                          configs.api_server_address +
-                            '/users/send/email/verification',
-                          {
-                            email: this.$data.email,
-                            token: this.$data.google_recaptcha_token,
-                          }
+              if (
+                this.$data.google_recaptcha_token != '' &&
+                this.$data.google_recaptcha_token != undefined
+              ) {
+                axios
+                  .post(configs.api_server_address + '/users/signup', {
+                    email: this.$data.email,
+                    password: this.$data.password,
+                    full_name: this.$data.full_name,
+                    recaptcha: this.$data.google_recaptcha_token,
+                  })
+                  .then((response) => {
+                    switch (response.data.code) {
+                      case 200:
+                        axios
+                          .post(
+                            configs.api_server_address +
+                              '/users/send/email/verification',
+                            {
+                              email: this.$data.email,
+                              token: this.$data.google_recaptcha_token,
+                            }
+                          )
+                          .then((response) => {
+                            switch (response.data.code) {
+                              case 200:
+                                this.$data.verify_your_email_page_show = true
+                                this.$data.submit_button_loading_sate = false
+                                break
+                              case 404:
+                                this.set_alert_data(
+                                  'خطایی در سمت سرور رخ داده است... ثبت کاربر امکان پذیر نیست... دوباره تلاش کنید.'
+                                )
+                                this.$data.verify_your_email_page_show = false
+                                this.$data.submit_button_loading_sate = false
+                                break
+                              case 400:
+                                this.set_alert_data(
+                                  'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
+                                )
+                                this.$data.submit_button_loading_sate = false
+                                break
+                              case 500:
+                                this.set_alert_data(
+                                  'خطا در ارسال تایید ایمیل... با پشتیبانی تماس بگیرید...'
+                                )
+                                this.$data.submit_button_loading_sate = false
+                                break
+                            }
+                          })
+                          .catch((error) => {
+                            this.set_alert_data(
+                              'خطای در برقراری ارتباط با سرور.'
+                            )
+                          })
+                        break
+                      case 500:
+                        this.set_alert_data('خطایی در سمت سرور رخ داده است.')
+                        this.$data.submit_button_loading_sate = false
+                        break
+                      case 503:
+                        if (response.data.message == 'recaptcha not verified') {
+                          this.set_alert_data('ریکپچا را تایید کنید.')
+                        }
+                        this.$data.submit_button_loading_sate = false
+                        break
+                      case 409:
+                        console.log(response.data)
+                        if (
+                          response.data.message ==
+                          'an user exist with this email'
+                        ) {
+                          this.set_alert_data(
+                            'کاربر دیگری با این ایمیل در سیستم وجود دارد.'
+                          )
+                        }
+                        if (response.data.message == 'email not valid') {
+                          this.set_alert_data(
+                            'ایمیل وارد شده قابل قبول نمی باشد.'
+                          )
+                        }
+                        window.grecaptcha.reset(0)
+                        this.$data.submit_button_loading_sate = false
+                        break
+                      case 400:
+                        this.set_alert_data(
+                          'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
                         )
-                        .then((response) => {
-                          switch (response.data.code) {
-                            case 200:
-                              this.$data.verify_your_email_page_show = true
-                              break
-                            case 404:
-                              this.set_alert_data(
-                                'خطایی در سمت سرور رخ داده است... ثبت کاربر امکان پذیر نیست... دوباره تلاش کنید.'
-                              )
-                              this.$data.verify_your_email_page_show = false
-                              break
-                            case 400:
-                              this.set_alert_data(
-                                'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
-                              )
-                              break
-                            case 500:
-                              this.set_alert_data(
-                                'خطایی در سمت سرور رخ داده است.'
-                              )
-                              break
-                          }
-                        })
-                        .catch((error) => {
-                          this.set_alert_data('خطای در برقراری ارتباط با سرور.')
-                        })
-                      break
-                    case 500:
-                      this.set_alert_data('خطایی در سمت سرور رخ داده است.')
-                      break
-                    case 409:
-                      this.set_alert_data('کاربر دیگری با این ایمیل وجود دارد.')
-                      break
-                    case 400:
-                      this.set_alert_data(
-                        'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
-                      )
-                      break
-                  }
-                })
-                .catch((error) => {
-                  this.set_alert_data('خطای در برقراری ارتباط با سرور.')
-                })
-              this.set_alert_data('')
+                        this.$data.submit_button_loading_sate = false
+                        window.grecaptcha.reset(0)
+                        break
+                    }
+                  })
+                  .catch((error) => {
+                    this.set_alert_data('خطای در برقراری ارتباط با سرور.')
+                    this.$data.submit_button_loading_sate = false
+                  })
+                this.set_alert_data('')
+              } else {
+                this.set_alert_data('ریکپچا را تایید کنید.')
+                this.$data.submit_button_loading_sate = false
+                window.grecaptcha.reset(0)
+              }
             } else {
               this.set_alert_data('گذرواژه و تکرار گذرواژه مطابقت ندارد.')
+              this.$data.submit_button_loading_sate = false
             }
           } else {
             this.set_alert_data(
               'برای ثبت نام ابتدا باید قوانین وبسایت را بپذیرید.'
             )
+            this.$data.submit_button_loading_sate = false
           }
         } else {
           this.set_alert_data('فیلد ها ناقص است.')
+          this.$data.submit_button_loading_sate = false
         }
-      } else {
-        this.set_alert_data('ریکپچا را تایید کنید.')
-      }
+        window.grecaptcha.reset(0)
+        clearInterval(delay)
+      }, 500)
     },
   },
   components: {

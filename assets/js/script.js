@@ -1,10 +1,12 @@
 import * as $ from 'jquery'
 
+const responsive_edge = 1200
+
 $('.Navbar-Dropdown, .Navbar-Dropdown *').hover(
   function () {
     // over
     let w = window.innerWidth
-    if (w > 1200) {
+    if (w > responsive_edge) {
       $(this)
         .find('.Navbar-Dropdown-Content')
         .css('display', 'block')
@@ -22,7 +24,7 @@ $('.Navbar-Dropdown, .Navbar-Dropdown *').hover(
   function () {
     // out
     let w = window.innerWidth
-    if (w > 1200) {
+    if (w > responsive_edge) {
       $(this)
         .find('.Navbar-Dropdown-Content')
         .animate(
@@ -40,7 +42,7 @@ $('.Navbar-Dropdown, .Navbar-Dropdown *').hover(
 )
 function toggleMenu() {
   let w = window.innerWidth
-  if (w < 1200) {
+  if (w < responsive_edge) {
     if ($('#Navbar').hasClass('Navbar-MB') == false) {
       __resize()
     }

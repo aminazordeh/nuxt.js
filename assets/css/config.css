@@ -41,6 +41,8 @@ a {
   --gen-color-low-opacity: rgb(26, 92, 255, 0.9);
   --gen-color-medium-opacity: rgb(25, 74, 197);
   --gen-color-darker: rgb(19, 54, 141);
+
+  --responsive_edge: 1000px;
 }
 .ubuntu {
   font-family: 'ubuntu';

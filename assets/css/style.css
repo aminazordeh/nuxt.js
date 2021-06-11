@@ -762,12 +762,7 @@ body {
     transform: translate(50%);
   }
 }
-@media screen and (max-width: 540px) {
-  .abs-form .form-content,
-  .abs-form {
-    width: 90%;
-  }
-}
+
 .form-title {
   font-family: 'Ubuntu', 'Vazir';
   font-size: 25px;
@@ -778,6 +773,24 @@ body {
 .form .form-content,
 .abs-form .form-content {
   padding: 15px 20px;
+}
+@media screen and (max-width: 540px) {
+  #signup .abs-form .form-content,
+  #signup .abs-form {
+    width: 100%;
+  }
+  #signup .form .form-content,
+  #signup .abs-form .form-content {
+    padding: 0;
+  }
+  #signin .abs-form .form-content,
+  #signin .abs-form {
+    width: 100%;
+  }
+  #signin .form .form-content,
+  #signin .abs-form .form-content {
+    padding: 30px;
+  }
 }
 .circle-hr {
   border: none;

@@ -1,44 +1,5 @@
 <template>
   <div id="posts">
-    <div
-      v-if="posts != undefined && posts.length > 0"
-      class="mt-3 w-100 d-block"
-      style="height: 50px"
-    >
-      <div class="search-bar">
-        <input
-          type="text"
-          class="input border-input"
-          placeholder="جست جو کنید..."
-          dir="rtl"
-        />
-        <button class="search-bar-go">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="ionicon"
-            viewBox="0 0 512 512"
-          >
-            <title>Search</title>
-            <path
-              d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
-              fill="none"
-              stroke="currentColor"
-              stroke-miterlimit="10"
-              stroke-width="32"
-            />
-            <path
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-miterlimit="10"
-              stroke-width="32"
-              d="M338.29 338.29L448 448"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <br />
     <div id="posts_container" class="pb-5 mb-5">
       <template v-if="posts != undefined && posts.length > 0 && view == true">
         <div class="post-box" v-for="item in posts" :key="item.post_path">

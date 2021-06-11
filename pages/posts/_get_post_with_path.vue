@@ -1,7 +1,9 @@
 <template>
   <div id="get_post_with_path">
     <div v-if="post != undefined" class="container text-right mt-5" dir="rtl">
-      <h1 class="header header-large">{{ post.post_header }}</h1>
+      <h1 class="header header-large" style="font-weight: 600">
+        {{ post.post_header }}
+      </h1>
       <span class="mt-2 d-block"
         >{{ post.post_publish_date }} - {{ post.post_author }}</span
       >

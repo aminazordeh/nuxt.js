@@ -18,11 +18,23 @@
         <h3 class="form-title">ورود</h3>
         <div>
           <label class="input-label">ایمیل شما</label>
-          <input v-model="email" class="input" type="email" required />
+          <input
+            v-model="email"
+            name="email"
+            class="input"
+            type="email"
+            required
+          />
         </div>
         <div>
           <label class="input-label">گذرواژه</label>
-          <input v-model="password" class="input" type="password" required />
+          <input
+            v-model="password"
+            name="password"
+            class="input"
+            type="password"
+            required
+          />
         </div>
 
         <span class="link red">
@@ -37,8 +49,9 @@
           </label>
         </div>
 
-        <div style="margin-top: 25px">
+        <div style="margin-top: 25px" class="g_recaptcha">
           <VueRecaptcha
+            class="g"
             :sitekey="google_recaptcha_sitekey"
             :loadRecaptchaScript="true"
             @verify="recaptchaVerified"
@@ -102,72 +115,82 @@ export default {
     },
     set_alert_data(text) {
       this.$set(this.$data.alert, '_text', text)
+      this.$data.submit_button_loading_sate = false
     },
     signin_submit() {
       this.$data.submit_button_loading_sate = true
-      if (
-        this.$data.google_recaptcha_token != '' &&
-        this.$data.google_recaptcha_token != undefined
-      ) {
+      let delay = setInterval(() => {
         if (
-          String(this.$data.email).trim() != '' &&
-          String(this.$data.password).trim() != ''
+          this.$data.google_recaptcha_token != '' &&
+          this.$data.google_recaptcha_token != undefined
         ) {
-          axios
-            .post(configs.api_server_address + '/users/signin', {
-              email: this.$data.email,
-              password: this.$data.password,
-              recaptcha: this.$data.google_recaptcha_token,
-            })
-            .then((response) => {
-              if (response.data != undefined && response.data != null) {
-                if (
-                  response.data.code != undefined &&
-                  response.data.code != null
-                ) {
-                  switch (response.data.code) {
-                    case 200:
-                      this.$store.commit('setUser', {
-                        email: this.$data.email,
-                        password: this.$data.password,
-                        token: response.data.token,
-                        remember_me: this.$data.remember_me,
-                      })
-                      this.$nuxt.$options.router.push('/')
-                      this.set_alert_data('')
-                    case 401:
-                      this.set_alert_data('ایمیل یا گذرواژه شما صحیح نمی باشد.')
-                      break
-                    case 503:
-                      if (
-                        response.data.message != undefined &&
-                        response.data.message == 'recaptcha not verified'
-                      ) {
-                        this.set_alert_data('ریکپچا را تایید کنید.')
-                      }
-                      break
-                    case 404:
-                      this.set_alert_data('کاربری با این ایمیل وجود ندارد.')
-                      break
-                    case 400:
-                      this.set_alert_data(
-                        'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
-                      )
-                      break
+          if (
+            String(this.$data.email).trim() != '' &&
+            String(this.$data.password).trim() != ''
+          ) {
+            axios
+              .post(configs.api_server_address + '/users/signin', {
+                email: this.$data.email,
+                password: this.$data.password,
+                recaptcha: this.$data.google_recaptcha_token,
+              })
+              .then((response) => {
+                if (response.data != undefined && response.data != null) {
+                  if (
+                    response.data.code != undefined &&
+                    response.data.code != null
+                  ) {
+                    switch (response.data.code) {
+                      case 200:
+                        this.$store.commit('setUser', {
+                          email: this.$data.email,
+                          password: this.$data.password,
+                          token: response.data.token,
+                          remember_me: this.$data.remember_me,
+                        })
+                        this.$nuxt.$options.router.push('/')
+                        this.set_alert_data('')
+
+                        return
+                      case 401:
+                        this.set_alert_data(
+                          'ایمیل یا گذرواژه شما صحیح نمی باشد.'
+                        )
+
+                        break
+                      case 503:
+                        if (
+                          response.data.message != undefined &&
+                          response.data.message == 'recaptcha not verified'
+                        ) {
+                          this.set_alert_data('ریکپچا را تایید کنید.')
+                        }
+
+                        break
+                      case 404:
+                        this.set_alert_data('کاربری با این ایمیل وجود ندارد.')
+                        break
+                      case 400:
+                        this.set_alert_data(
+                          'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
+                        )
+                        break
+                    }
                   }
                 }
-              }
-            })
-            .catch((error) => {
-              this.set_alert_data('خطای در برقراری ارتباط با سرور.')
-            })
+              })
+              .catch((error) => {
+                this.set_alert_data('خطای در برقراری ارتباط با سرور.')
+              })
+          } else {
+            this.set_alert_data('فیلد ها ناقص است.')
+          }
         } else {
-          this.set_alert_data('فیلد ها ناقص است.')
+          this.set_alert_data('ریکپچا را تایید کنید.')
         }
-      } else {
-        this.set_alert_data('ریکپچا را تایید کنید.')
-      }
-      this.$data.submit_button_loading_sate = false
+        window.grecaptcha.reset(0)
+        clearInterval(delay)
+      }, 500)
     },
   },
   components: {

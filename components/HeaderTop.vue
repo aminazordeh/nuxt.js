@@ -5,7 +5,6 @@
         String(this.$route.path).includes('dashboard') == false ? false : true,
     }"
     id="headerTop"
-    class="animate__animated animate__flipInX"
   >
     <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
 
@@ -26,7 +25,8 @@
     <div class="Navbar" id="Navbar">
       <div class="margin-nav">
         <div
-          class="Navbar-D-I-Block"
+          class="Navbar-D-I-Block Navbar-Right pt-0 pr-0"
+          style="top: -13px"
           v-bind:style="[
             logged ? { display: 'inline-block' } : { display: 'none' },
           ]"
@@ -110,9 +110,49 @@
 </template>
 
 <script>
+import configs from '../assets/js/configs'
+import axios from 'axios'
+
 export default {
   name: 'headerTop',
   mounted() {
+    let saved__user = localStorage.getItem('saved__user')
+    if (saved__user != undefined && saved__user != null) {
+      saved__user = JSON.parse(saved__user)
+      this.$data.password = axios
+        .post(configs.api_server_address + '/users/auth/token', {
+          email: saved__user.email,
+          password: saved__user.password,
+          token: saved__user.token,
+        })
+        .then((response) => {
+          if (
+            response.data != undefined &&
+            response.data.code != undefined &&
+            response.data != null &&
+            response.data.code != null
+          ) {
+            switch (response.data.code) {
+              case 200:
+                this.$store.commit('setUser', {
+                  email: saved__user.email,
+                  password: saved__user.email,
+                  token: saved__user.token,
+                  remember_me: true,
+                })
+                break
+              case 401:
+                return console.error('saved user token not valid')
+                break
+              case 400:
+                return console.error('error in login with saved user')
+                break
+            }
+          } else {
+            return console.error('error in send request to api server')
+          }
+        })
+    }
     this.getUserState()
   },
   data() {
