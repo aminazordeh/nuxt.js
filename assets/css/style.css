@@ -64,6 +64,9 @@ ul {
 .dvsp-button:disabled {
   cursor: default;
 }
+.dvsp-button.normal-pad {
+  padding-top: 10px;
+}
 .button-with-spinner {
   position: relative;
   overflow: hidden;
@@ -235,12 +238,18 @@ ul {
 }
 .dvsp-button.dvsp-button-icon {
   border-radius: 50px;
-  width: 40px;
-  height: 40px;
-  padding: 10px 0;
+  width: 45px;
+  height: 45px;
+  padding: 10px;
   text-align: center;
-  background-color: #ccc;
-  border-color: #ccc;
+}
+.dvsp-button.dvsp-button-danger {
+  background-color: #ff002b;
+  border-color: #ff002b;
+}
+.dvsp-button.dvsp-button-danger:hover {
+  background-color: #e6042a;
+  border-color: #e6042a;
 }
 .d-inline-block {
   display: inline-block;
@@ -861,7 +870,7 @@ body {
   width: 3px;
 }
 #leftBar::-webkit-scrollbar-track {
-  background: #ffffff;
+  background: #f5f5fd;
 }
 #leftBar::-webkit-scrollbar-thumb {
   background-color: transparent;
@@ -961,6 +970,14 @@ body {
     0px 30px 50px rgba(7, 7, 7, 0.04);
   padding: 30px;
 }
+@media only screen and (max-width: 800px) {
+  .white-box {
+    padding: 10px;
+  }
+  #dashboard_content {
+    padding: 30px 20px;
+  }
+}
 .white-box:first-child,
 .white-box:last-child {
   margin: 0;
@@ -1020,7 +1037,7 @@ body {
   width: var(--size);
 }
 #posts_container {
-  position: absolute;
+  position: relative;
   left: 50%;
   transform: translate(-50%);
   width: 90%;
@@ -1043,7 +1060,6 @@ body {
   #leftBar #leftBarNavbar {
     flex-direction: row;
     padding: 0 15px;
-    margin-top: 10px;
   }
   #dashboard_content {
     width: 100%;
@@ -1123,7 +1139,8 @@ body {
 }
 .post-read-more {
   width: 100%;
-  display: block;
+  display: flex;
+  justify-content: flex-end;
   text-align: left;
   padding: 15px 0;
 }
@@ -1228,5 +1245,34 @@ body {
 @keyframes spin {
   to {
     -webkit-transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #user_access_badge {
+    position: fixed;
+    width: 150px;
+    padding: 10px 20px;
+    text-align: center;
+    color: #fff;
+    z-index: 70;
+    padding-top: 30px;
+    top: -10px;
+    right: -57px;
+    transform: rotate(45deg);
+  }
+}
+@media screen and (min-width: 720px) {
+  #user_access_badge {
+    position: fixed;
+    padding: 5px 0px;
+    width: calc(100% - var(--leftBar-width));
+    text-align: center;
+    color: #fff;
+    z-index: 70;
+    top: auto;
+    transform: none;
+    right: 0;
+    bottom: 0;
   }
 }

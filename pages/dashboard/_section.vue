@@ -1,5 +1,20 @@
 <template>
   <div id="dashboard">
+    <div
+      v-if="
+        userInfo != undefined &&
+        userInfo != null &&
+        userInfo != '' &&
+        userInfo.access != 'user'
+      "
+      v-bind:style="{
+        backgroundColor: userInfo.access == 'admin' ? '#111' : '#1a5cff',
+      }"
+      id="user_access_badge"
+    >
+      <template v-if="userInfo.access == 'admin'"> مدیر </template>
+      <template v-else-if="userInfo.access == 'writer'"> نویسنده </template>
+    </div>
     <div id="dashboard_index">
       <div id="topNavbar" class="pr-sm-4">
         <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
@@ -43,18 +58,15 @@
                   userInfo.full_name != ''
                 "
                 id="logged_user_username"
-                >{{ userInfo.full_name }}
+              >
+                {{ userInfo.full_name }}
               </span>
             </div>
           </div>
         </div>
       </div>
       <div id="leftBar">
-        <div id="leftBarDots">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
+        <div id="leftBarDots"><span></span><span></span><span></span></div>
         <div id="leftBarNavbar">
           <nuxt-link to="/dashboard/home" class="leftBarNavbar-Item">
             <svg
@@ -81,188 +93,7 @@
               />
             </svg>
           </nuxt-link>
-          <nuxt-link to="/" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Home</title>
-              <path
-                d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <path
-                d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-            </svg>
-          </nuxt-link>
-          <nuxt-link to="/" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Home</title>
-              <path
-                d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <path
-                d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-            </svg>
-          </nuxt-link>
-          <nuxt-link to="/" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Home</title>
-              <path
-                d="M80 212v236a16 16 0 0016 16h96V328a24 24 0 0124-24h80a24 24 0 0124 24v136h96a16 16 0 0016-16V212"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <path
-                d="M480 256L266.89 52c-5-5.28-16.69-5.34-21.78 0L32 256M400 179V64h-48v69"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-            </svg>
-          </nuxt-link>
-          <nuxt-link to="/dashboard/section2" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Desktop</title>
-              <rect
-                x="32"
-                y="64"
-                width="448"
-                height="320"
-                rx="32"
-                ry="32"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-                d="M304 448l-8-64h-80l-8 64h96z"
-              />
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-                d="M368 448H144"
-              />
-              <path
-                d="M32 304v48a32.09 32.09 0 0032 32h384a32.09 32.09 0 0032-32v-48zm224 64a16 16 0 1116-16 16 16 0 01-16 16z"
-              />
-            </svg>
-          </nuxt-link>
-          <nuxt-link to="/dashboard/section2" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Desktop</title>
-              <rect
-                x="32"
-                y="64"
-                width="448"
-                height="320"
-                rx="32"
-                ry="32"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <path
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-                d="M304 448l-8-64h-80l-8 64h96z"
-              />
-              <path
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="32"
-                d="M368 448H144"
-              />
-              <path
-                d="M32 304v48a32.09 32.09 0 0032 32h384a32.09 32.09 0 0032-32v-48zm224 64a16 16 0 1116-16 16 16 0 01-16 16z"
-              />
-            </svg>
-          </nuxt-link>
-          <a href="" class="leftBarNavbar-Item">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="ionicon"
-              viewBox="0 0 512 512"
-            >
-              <title>Clipboard</title>
-              <path
-                d="M336 64h32a48 48 0 0148 48v320a48 48 0 01-48 48H144a48 48 0 01-48-48V112a48 48 0 0148-48h32"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-              <rect
-                x="176"
-                y="32"
-                width="160"
-                height="64"
-                rx="26.13"
-                ry="26.13"
-                fill="none"
-                stroke="currentColor"
-                stroke-linejoin="round"
-                stroke-width="32"
-              />
-            </svg>
-          </a>
-          <a href="" class="leftBarNavbar-Item">
+          <nuxt-link to="/dashboard/bookmarks" class="leftBarNavbar-Item">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="ionicon"
@@ -284,106 +115,153 @@
                 stroke-width="32"
               />
             </svg>
-          </a>
+          </nuxt-link>
         </div>
       </div>
+      <!-- NOTE Views -->
+      <!-- NOTE  -->
       <div
-        v-if="String(this.$route.params.section) == 'home'"
+        v-if="
+          String(this.$route.params.section) == 'home' &&
+          userInfo != undefined &&
+          userInfo != null &&
+          userInfo != ''
+        "
         id="dashboard_content"
       >
-        <h4 class="header header-large text-right w-100 d-block">داشبورد</h4>
-        <div class="mt-3 p-0 flex">
-          <div class="white-box">
-            <div class="white-box-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Book</title>
-                <path
-                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-              </svg>
+        <h4 class="header header-large text-right w-100 d-block mb-2">
+          اطلاعات شما
+        </h4>
+        <div class="white-box">
+          <div class="row row-md-column">
+            <div class="col ml-md-3">
+              <label class="input-label">نام کامل شما</label>
+              <input v-model="userInfo.full_name" class="input" type="text" />
             </div>
-            <div class="white-box-header">باکس سفید</div>
-            <div class="white-box-value">1</div>
-          </div>
-          <div class="white-box mr-xl-3">
-            <div class="white-box-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Book</title>
-                <path
-                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-              </svg>
+            <div class="col">
+              <label class="input-label">ایمیل شما</label>
+              <input
+                readonly
+                v-model="userInfo.email"
+                class="input"
+                type="text"
+              />
             </div>
-            <div class="white-box-header">باکس سفید</div>
-            <div class="white-box-value">2</div>
           </div>
-          <div class="white-box mr-xl-3 ml-xl-3">
-            <div class="white-box-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Book</title>
-                <path
-                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-              </svg>
+          <div class="row row-md-column">
+            <div class="col ml-md-3">
+              <label class="input-label">گذرواژه</label>
+              <input v-model="new_password" class="input" type="text" />
             </div>
-            <div class="white-box-header">باکس سفید</div>
-            <div class="white-box-value">3</div>
-          </div>
-          <div class="white-box">
-            <div class="white-box-icon">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="ionicon"
-                viewBox="0 0 512 512"
-              >
-                <title>Book</title>
-                <path
-                  d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="32"
-                />
-              </svg>
+            <div class="col">
+              <label class="input-label">تکرار گذرواژه</label>
+              <input v-model="new_password_repeat" class="input" type="text" />
             </div>
-            <div class="white-box-header">باکس سفید</div>
-            <div class="white-box-value">4</div>
           </div>
+          <button
+            :disabled="save_userinfo_submit_button_loading_sate"
+            class="dvsp-button button-with-spinner mt-4"
+          >
+            ثبت
+            <div
+              class="button_loading_state"
+              v-if="save_userinfo_submit_button_loading_sate"
+            ></div>
+          </button>
         </div>
       </div>
       <div
         id="dashboard_content"
-        v-if="String(this.$route.params.section) == 'section2'"
+        v-if="String(this.$route.params.section) == 'bookmarks'"
       >
-        Section 2
+        <h4 class="header header-large text-right w-100 d-block mb-2">
+          نشان شده ها
+        </h4>
+        <div
+          id="posts_container"
+          class="mt-0 pt-0 mb-5 pt-5 padding-bottom: 100px;"
+        >
+          <template v-for="item in [1, 2, 3, 4]">
+            <div class="post-box">
+              <div class="img-loader">
+                <img
+                  src="https://picsum.photos/900/1200"
+                  alt="post cover image"
+                  class="post-cover-img"
+                  onload="this.classList.add('loaded')"
+                />
+              </div>
+              <h2 class="post-header">asdasdasdasdasd</h2>
+              <p class="post-description">asdasdasdasdas</p>
+              <div class="post-read-more">
+                <nuxt-link
+                  :to="/posts/"
+                  class="
+                    ml-1
+                    dvsp-button dvsp-button-icon dvsp-button-danger
+                    normal-pad
+                  "
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <title>Trash</title>
+                    <path
+                      d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <path
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                      d="M80 112h352"
+                    />
+                    <path
+                      d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    /></svg
+                ></nuxt-link>
+                <nuxt-link
+                  :to="/posts/"
+                  class="dvsp-button dvsp-button-icon normal-pad"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="ionicon"
+                    viewBox="0 0 512 512"
+                  >
+                    <title>Eye</title>
+                    <path
+                      d="M255.66 112c-77.94 0-157.89 45.11-220.83 135.33a16 16 0 00-.27 17.77C82.92 340.8 161.8 400 255.66 400c92.84 0 173.34-59.38 221.79-135.25a16.14 16.14 0 000-17.47C428.89 172.28 347.8 112 255.66 112z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                    />
+                    <circle
+                      cx="256"
+                      cy="256"
+                      r="80"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-miterlimit="10"
+                      stroke-width="32"
+                    /></svg
+                ></nuxt-link>
+              </div>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
   </div>
@@ -396,7 +274,14 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      userInfo: null,
+      userInfo: {
+        full_name: '',
+        email: '',
+        password: '',
+        access: '',
+        bookmarks: [],
+      },
+      save_userinfo_submit_button_loading_sate: false,
     }
   },
   methods: {
@@ -404,7 +289,7 @@ export default {
       this.$set(this.$data, 'userInfo', data)
     },
     request_for_get_user_info() {
-      this.$data.password = axios
+      axios
         .post(configs.api_server_address + '/users/auth/token', {
           email: this.$store.state.user.email,
           password: this.$store.state.user.password,
