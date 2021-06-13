@@ -27,7 +27,7 @@
               type="text"
               required
               minlength="4"
-              maxlength="12"
+              maxlength="17"
             />
           </div>
           <div>
@@ -177,7 +177,9 @@ export default {
   methods: {
     recaptchaVerified(recaptchaToken) {
       this.$data.google_recaptcha_token = recaptchaToken
-      window.grecaptcha.reset(0)
+    },
+    resetRecaptcha() {
+      window.grecaptcha.reset()
     },
     set_alert_data(text) {
       this.$set(this.$data.alert, '_text', text)
@@ -284,15 +286,15 @@ export default {
                             'ایمیل وارد شده قابل قبول نمی باشد.'
                           )
                         }
-                        window.grecaptcha.reset(0)
+                        this.resetRecaptcha()
                         this.$data.submit_button_loading_sate = false
                         break
                       case 400:
                         this.set_alert_data(
                           'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
                         )
+                        this.resetRecaptcha()
                         this.$data.submit_button_loading_sate = false
-                        window.grecaptcha.reset(0)
                         break
                     }
                   })
@@ -304,7 +306,7 @@ export default {
               } else {
                 this.set_alert_data('ریکپچا را تایید کنید.')
                 this.$data.submit_button_loading_sate = false
-                window.grecaptcha.reset(0)
+                this.resetRecaptcha()
               }
             } else {
               this.set_alert_data('گذرواژه و تکرار گذرواژه مطابقت ندارد.')
@@ -320,7 +322,7 @@ export default {
           this.set_alert_data('فیلد ها ناقص است.')
           this.$data.submit_button_loading_sate = false
         }
-        window.grecaptcha.reset(0)
+        this.resetRecaptcha()
         clearInterval(delay)
       }, 500)
     },

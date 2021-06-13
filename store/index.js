@@ -4,6 +4,7 @@ export const state = () => ({
     password: '',
     token: '',
   },
+  userInfo: {},
 })
 
 export const mutations = {

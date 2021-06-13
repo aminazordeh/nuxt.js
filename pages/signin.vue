@@ -110,6 +110,9 @@ export default {
     }
   },
   methods: {
+    resetRecaptcha() {
+      window.grecaptcha.reset()
+    },
     recaptchaVerified(recaptchaToken) {
       this.$data.google_recaptcha_token = recaptchaToken
     },
@@ -150,13 +153,12 @@ export default {
                         })
                         this.$nuxt.$options.router.push('/')
                         this.set_alert_data('')
-
-                        return
+                        this.resetRecaptcha()
                       case 401:
                         this.set_alert_data(
                           'ایمیل یا گذرواژه شما صحیح نمی باشد.'
                         )
-
+                        this.resetRecaptcha()
                         break
                       case 503:
                         if (
@@ -164,16 +166,24 @@ export default {
                           response.data.message == 'recaptcha not verified'
                         ) {
                           this.set_alert_data('ریکپچا را تایید کنید.')
+                        } else if (
+                          response.data.message == 'email not verified'
+                        ) {
+                          this.set_alert_data('ایمیل شما تایید نشده است!')
+                        } else {
+                          this.set_alert_data('سرویس در دسترس نیست...')
                         }
-
+                        this.resetRecaptcha()
                         break
                       case 404:
                         this.set_alert_data('کاربری با این ایمیل وجود ندارد.')
+                        this.resetRecaptcha()
                         break
                       case 400:
                         this.set_alert_data(
                           'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
                         )
+                        this.resetRecaptcha()
                         break
                     }
                   }
@@ -181,14 +191,15 @@ export default {
               })
               .catch((error) => {
                 this.set_alert_data('خطای در برقراری ارتباط با سرور.')
+                this.resetRecaptcha()
               })
           } else {
             this.set_alert_data('فیلد ها ناقص است.')
           }
         } else {
           this.set_alert_data('ریکپچا را تایید کنید.')
+          this.resetRecaptcha()
         }
-        window.grecaptcha.reset(0)
         clearInterval(delay)
       }, 500)
     },

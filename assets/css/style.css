@@ -612,7 +612,6 @@ body {
 #headerTop .Navbar-MB a:not(.dvsp-button).nuxt-link-exact-active::after {
   display: none;
 }
-
 .menuButton {
   background-color: transparent;
   border: none;

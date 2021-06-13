@@ -158,6 +158,7 @@ export default {
   data() {
     return {
       logged: false,
+      userInfo: {},
     }
   },
   methods: {
@@ -171,6 +172,8 @@ export default {
         this.$store.state.user.password != null
       ) {
         this.$data.logged = true
+        // TODO
+        // this.$set(this.$data, 'userInfo', response.data.data)
       } else {
         this.$data.logged = false
       }
