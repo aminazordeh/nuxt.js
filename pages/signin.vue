@@ -151,6 +151,10 @@ export default {
                           token: response.data.token,
                           remember_me: this.$data.remember_me,
                         })
+                        this.$store.commit('setUserInfo', {
+                          userInfo: response.data.user_info,
+                        })
+                        console.log(this.$store.state)
                         this.$nuxt.$options.router.push('/')
                         this.set_alert_data('')
                         this.resetRecaptcha()

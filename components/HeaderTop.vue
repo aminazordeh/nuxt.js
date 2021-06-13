@@ -62,11 +62,32 @@
                   </div>
                 </div>
                 <div class="d-inline-block">
-                  <span id="logged_user_username">[admin] tahadostifam </span>
+                  <span
+                    v-if="
+                      userInfo != undefined &&
+                      userInfo != null &&
+                      userInfo != '' &&
+                      userInfo.full_name != undefined &&
+                      userInfo.full_name != null &&
+                      userInfo.full_name != ''
+                    "
+                    id="logged_user_username"
+                    >{{ userInfo.full_name }}
+                  </span>
                 </div>
               </div>
             </button>
-            <div class="Navbar-Dropdown-Content">
+            <div
+              v-if="
+                userInfo != undefined &&
+                userInfo != null &&
+                userInfo != '' &&
+                userInfo.full_name != undefined &&
+                userInfo.full_name != null &&
+                userInfo.full_name != ''
+              "
+              class="Navbar-Dropdown-Content"
+            >
               <nuxt-link to="/dashboard" class="Navbar-Link">داشبورد</nuxt-link>
               <a class="Navbar-Link">تیکت ها</a>
               <a @click="logout_user" class="Navbar-Link"
@@ -140,6 +161,7 @@ export default {
                   token: saved__user.token,
                   remember_me: true,
                 })
+                this.setUserInfo(response.data.user_info)
                 break
               case 401:
                 return console.error('saved user token not valid')
@@ -158,7 +180,7 @@ export default {
   data() {
     return {
       logged: false,
-      userInfo: {},
+      userInfo: null,
     }
   },
   methods: {
@@ -172,12 +194,13 @@ export default {
         this.$store.state.user.password != null
       ) {
         this.$data.logged = true
-        // TODO
-        // this.$set(this.$data, 'userInfo', response.data.data)
       } else {
         this.$data.logged = false
       }
       require('../assets/js/script')
+    },
+    setUserInfo(data) {
+      this.$set(this.$data, 'userInfo', data)
     },
     logout_user() {
       this.$store.commit('setUser', {
@@ -191,6 +214,9 @@ export default {
   },
   watch: {
     '$store.state.user.email': 'getUserState',
+    '$store.state.userInfo'() {
+      this.setUserInfo(this.$store.state.userInfo)
+    },
   },
 }
 </script>

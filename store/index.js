@@ -4,10 +4,13 @@ export const state = () => ({
     password: '',
     token: '',
   },
-  userInfo: {},
+  userInfo: null,
 })
 
 export const mutations = {
+  setUserInfo(state, data) {
+    state.userInfo = data.userInfo
+  },
   setUser(state, user) {
     state.user.email = user.email
     state.user.password = user.password

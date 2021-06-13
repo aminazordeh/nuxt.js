@@ -1,7 +1,7 @@
 <template>
   <div id="dashboard">
     <div id="dashboard_index">
-      <div id="topNavbar" class="pr-sm-4 animate__animated animate__fadeInDown">
+      <div id="topNavbar" class="pr-sm-4">
         <h1 id="headerBrand"><nuxt-link to="/">devsparkle.ir</nuxt-link></h1>
         <div>
           <div id="logged_user" dir="rtl">
@@ -33,12 +33,23 @@
               </div>
             </div>
             <div class="d-inline-block">
-              <span id="logged_user_username">[admin] tahadostifam </span>
+              <span
+                v-if="
+                  userInfo != undefined &&
+                  userInfo != null &&
+                  userInfo != '' &&
+                  userInfo.full_name != undefined &&
+                  userInfo.full_name != null &&
+                  userInfo.full_name != ''
+                "
+                id="logged_user_username"
+                >{{ userInfo.full_name }}
+              </span>
             </div>
           </div>
         </div>
       </div>
-      <div class="animate__animated animate__fadeInLeft" id="leftBar">
+      <div id="leftBar">
         <div id="leftBarDots">
           <span></span>
           <span></span>
@@ -280,19 +291,9 @@
         v-if="String(this.$route.params.section) == 'home'"
         id="dashboard_content"
       >
-        <h4
-          class="
-            header header-large
-            text-right
-            w-100
-            d-block
-            animate__animated animate__slideInRight
-          "
-        >
-          داشبورد
-        </h4>
+        <h4 class="header header-large text-right w-100 d-block">داشبورد</h4>
         <div class="mt-3 p-0 flex">
-          <div class="white-box animate__animated animate__zoomIn">
+          <div class="white-box">
             <div class="white-box-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -313,7 +314,7 @@
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">1</div>
           </div>
-          <div class="white-box mr-xl-3 animate__animated animate__zoomIn">
+          <div class="white-box mr-xl-3">
             <div class="white-box-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -334,9 +335,7 @@
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">2</div>
           </div>
-          <div
-            class="white-box mr-xl-3 ml-xl-3 animate__animated animate__zoomIn"
-          >
+          <div class="white-box mr-xl-3 ml-xl-3">
             <div class="white-box-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -357,7 +356,7 @@
             <div class="white-box-header">باکس سفید</div>
             <div class="white-box-value">3</div>
           </div>
-          <div class="white-box animate__animated animate__zoomIn">
+          <div class="white-box">
             <div class="white-box-icon">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -391,13 +390,81 @@
 </template>
 
 <script>
+import configs from '../../assets/js/configs'
+import axios from 'axios'
+
 export default {
+  data() {
+    return {
+      userInfo: null,
+    }
+  },
+  methods: {
+    setUserInfo(data) {
+      this.$set(this.$data, 'userInfo', data)
+    },
+    request_for_get_user_info() {
+      this.$data.password = axios
+        .post(configs.api_server_address + '/users/auth/token', {
+          email: this.$store.state.user.email,
+          password: this.$store.state.user.password,
+          token: this.$store.state.user.token,
+        })
+        .then((response) => {
+          if (
+            response.data != undefined &&
+            response.data.code != undefined &&
+            response.data != null &&
+            response.data.code != null
+          ) {
+            switch (response.data.code) {
+              case 200:
+                this.setUserInfo(response.data.user_info)
+                break
+              case 401:
+                return console.error('saved user token not valid')
+                break
+              case 400:
+                return console.error('error in login with saved user')
+                break
+            }
+          } else {
+            return console.error('error in send request to api server')
+          }
+        })
+    },
+  },
   mounted() {
     if (
       this.$route.params.section == '' ||
       this.$route.params.section == undefined
     ) {
-      this.$nuxt.$options.router.push('/dashboard/home')
+      return this.$nuxt.$options.router.push('/dashboard/home')
+    }
+
+    if (
+      this.$store.state.user.email != '' &&
+      this.$store.state.user.password != '' &&
+      this.$store.state.user.email != undefined &&
+      this.$store.state.user.password != undefined &&
+      this.$store.state.user.email != null &&
+      this.$store.state.user.password != null
+    ) {
+      this.request_for_get_user_info()
+    } else {
+      let saved__user = localStorage.getItem('saved__user')
+      if (saved__user != undefined && saved__user != null) {
+        saved__user = JSON.parse(saved__user)
+        this.$store.commit('setUser', {
+          email: saved__user.email,
+          password: saved__user.email,
+          token: saved__user.token,
+          remember_me: true,
+        })
+      } else {
+        this.$nuxt.$options.router.push('/signin')
+      }
+      this.request_for_get_user_info()
     }
   },
 }

@@ -1010,7 +1010,6 @@ body {
   right: 0;
   opacity: 0;
   height: 0;
-  transition: 0.4s ease-out;
 }
 #leftBarNavbar .leftBarNavbar-Item.nuxt-link-exact-active::after {
   opacity: 1;
