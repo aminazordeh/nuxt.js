@@ -94,7 +94,7 @@ export default {
       }
     },
   },
-  mounted() {
+  created() {
     axios
       .post(configs.api_server_address + '/posts/get_post', {
         post_path: this.$route.params.get_post_with_path,
@@ -124,6 +124,7 @@ export default {
         }
       })
       .catch((err) => {})
+    this.updateLikeData()
   },
   methods: {
     updateLikeData() {
