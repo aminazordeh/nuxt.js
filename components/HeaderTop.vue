@@ -114,6 +114,11 @@
         <nav class="Navbar-D-I-Block">
           <nuxt-link to="/" class="Navbar-Link">خانه</nuxt-link>
           <nuxt-link to="/posts" class="Navbar-Link">پست ها</nuxt-link>
+          <a class="Navbar-Link">دوره های آموزشی</a>
+          <a class="Navbar-Link">نویسنده گان</a>
+        </nav>
+
+        <!-- 
           <div class="Navbar-Dropdown">
             <button class="Navbar-Dropdown-Button">دراپ داون</button>
             <div class="Navbar-Dropdown-Content">
@@ -122,9 +127,7 @@
               <a class="Navbar-Link">آیتم ۳</a>
             </div>
           </div>
-          <a class="Navbar-Link">ارسال تیکت</a>
-          <a class="Navbar-Link">نویسنده گان</a>
-        </nav>
+         -->
       </div>
     </div>
   </div>

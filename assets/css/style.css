@@ -187,6 +187,7 @@ ul {
 }
 .like-button svg {
   width: 30px;
+  color: #111;
 }
 .like-button {
   cursor: pointer;
@@ -266,8 +267,8 @@ body {
   user-select: none;
 }
 #logged_user #user_avatar svg {
-  fill: rgb(184, 184, 184);
-  color: rgb(184, 184, 184);
+  fill: rgb(114, 114, 114);
+  color: rgb(114, 114, 114);
 }
 #logged_user #user_avatar {
   position: relative;

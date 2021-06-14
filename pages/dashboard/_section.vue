@@ -181,7 +181,7 @@
           id="posts_container"
           class="w-100 mt-0 pt-0 mb-5 pt-5 padding-bottom: 100px;"
         >
-          <template v-for="item in [1, 2, 3, 4]">
+          <template>
             <div class="post-box">
               <div class="img-loader">
                 <img
@@ -194,15 +194,15 @@
               <h2 class="post-header">asdasdasdasdasd</h2>
               <p class="post-description">asdasdasdasdas</p>
               <div class="post-read-more">
-                <nuxt-link
-                  :to="/posts/"
+                <button
                   class="
                     ml-1
                     dvsp-button dvsp-button-icon dvsp-button-danger
                     normal-pad
                   "
                   style="border-radius: 3px"
-                  ><svg
+                >
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ionicon"
                     viewBox="0 0 512 512"
@@ -230,13 +230,15 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="32"
-                    /></svg
-                ></nuxt-link>
+                    />
+                  </svg>
+                </button>
                 <nuxt-link
-                  :to="/posts/"
+                  to="/posts/aaaa"
                   class="dvsp-button dvsp-button-icon normal-pad"
                   style="border-radius: 3px"
-                  ><svg
+                >
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ionicon"
                     viewBox="0 0 512 512"
@@ -258,8 +260,9 @@
                       stroke="currentColor"
                       stroke-miterlimit="10"
                       stroke-width="32"
-                    /></svg
-                ></nuxt-link>
+                    />
+                  </svg>
+                </nuxt-link>
               </div>
             </div>
           </template>
@@ -283,6 +286,8 @@ export default {
         access: '',
         bookmarks: [],
       },
+      new_password: '',
+      new_password_repeat: '',
       save_userinfo_submit_button_loading_sate: false,
     }
   },
@@ -344,10 +349,11 @@ export default {
         saved__user = JSON.parse(saved__user)
         this.$store.commit('setUser', {
           email: saved__user.email,
-          password: saved__user.email,
+          password: saved__user.password,
           token: saved__user.token,
           remember_me: true,
         })
+        this.request_for_get_user_info()
       } else {
         this.$nuxt.$options.router.push('/signin')
       }

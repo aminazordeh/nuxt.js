@@ -55,6 +55,9 @@ a {
   text-align: center;
 }
 
+.text-black {
+  color: #111;
+}
 .row {
   display: flex;
   flex-direction: row-reverse;
