@@ -179,7 +179,7 @@
         </h4>
         <div
           id="posts_container"
-          class="mt-0 pt-0 mb-5 pt-5 padding-bottom: 100px;"
+          class="w-100 mt-0 pt-0 mb-5 pt-5 padding-bottom: 100px;"
         >
           <template v-for="item in [1, 2, 3, 4]">
             <div class="post-box">
@@ -201,6 +201,7 @@
                     dvsp-button dvsp-button-icon dvsp-button-danger
                     normal-pad
                   "
+                  style="border-radius: 3px"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ionicon"
@@ -234,6 +235,7 @@
                 <nuxt-link
                   :to="/posts/"
                   class="dvsp-button dvsp-button-icon normal-pad"
+                  style="border-radius: 3px"
                   ><svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="ionicon"

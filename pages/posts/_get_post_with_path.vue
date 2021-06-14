@@ -7,16 +7,24 @@
       <span class="mt-2 d-block"
         >{{ post.post_publish_date }} - {{ post.post_author }}</span
       >
-      <div class="d-inline-block">
-        <span style="position: relative; top: -10px; font-size: Roboto"
-          >21</span
-        >
+      <div
+        v-if="
+          saved__user_email != undefined &&
+          saved__user_email != null &&
+          String(saved__user_email).trim() != ''
+        "
+        class="d-inline-block"
+      >
+        <span style="position: relative; top: -10px; font-size: Roboto">{{
+          post.post_likes
+        }}</span>
         <button
           @click="toggleLikeButton"
-          v-if="this.post_liked == false"
+          :class="{ liked: post_liked }"
           class="like-button mt-2"
         >
           <svg
+            v-if="this.post_liked == false"
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
             viewBox="0 0 512 512"
@@ -31,13 +39,8 @@
               stroke-width="32"
             />
           </svg>
-        </button>
-        <button
-          @click="toggleLikeButton"
-          v-if="this.post_liked == true"
-          class="like-button liked mt-2"
-        >
           <svg
+            v-if="this.post_liked == true"
             xmlns="http://www.w3.org/2000/svg"
             class="ionicon"
             viewBox="0 0 512 512"
@@ -71,11 +74,25 @@ export default {
     return {
       post_liked: false,
       post: undefined,
+      post_like_button_loading_state: true,
       alert: {
         _text: '',
         _color: '#777',
       },
+      you_are_liked_this_post: 'undefined',
+      saved__user_email: this.$store.state.user.email,
     }
+  },
+  watch: {
+    '$store.state.user.email'(val) {
+      if (
+        this.$store.state.user.email != undefined &&
+        this.$store.state.user.email != ''
+      ) {
+        this.$set(this.$data, 'saved__user_email', this.$store.state.user.email)
+        this.updateLikeData()
+      }
+    },
   },
   mounted() {
     axios
@@ -109,11 +126,88 @@ export default {
       .catch((err) => {})
   },
   methods: {
+    updateLikeData() {
+      axios
+        .post(configs.api_server_address + '/posts/get_post', {
+          post_path: this.$route.params.get_post_with_path,
+          email: this.$store.state.user.email
+            ? this.$store.state.user.email
+            : undefined,
+        })
+        .then((response) => {
+          if (response.status == 200) {
+            if (
+              response.data != undefined &&
+              response.data != null &&
+              response.data.code == 200
+            ) {
+              this.$set(
+                this.$data.post,
+                'post_likes',
+                response.data.data.post_likes
+              )
+              if (response.data.data.you_are_liked_this_post == true) {
+                this.$set(this.$data, 'post_liked', true)
+              } else {
+                this.$set(this.$data, 'post_liked', false)
+              }
+            } else if (
+              response.data.status == 404 ||
+              response.data.message == 'post not found'
+            ) {
+              this.$set(this.$data.alert, '_text', 'پست مورد نظر یافت نشد.')
+              this.$set(this.$data.alert, '_color', '#777')
+            } else {
+              this.$set(
+                this.$data.alert,
+                '_text',
+                'خطایی در سمت سرور رخ داده است.'
+              )
+              this.$set(this.$data.alert, '_color', 'red')
+            }
+          }
+        })
+        .catch((err) => {})
+    },
     toggleLikeButton() {
-      if (this.$data.post_liked == true) {
-        return (this.$data.post_liked = false)
+      if (
+        this.$store.state.user.email != '' &&
+        this.$store.state.user.password != '' &&
+        this.$store.state.user.email != undefined &&
+        this.$store.state.user.password != undefined &&
+        this.$store.state.user.email != null &&
+        this.$store.state.user.password != null
+      ) {
+        axios
+          .post(configs.api_server_address + '/posts/like_post', {
+            email: this.$store.state.user.email,
+            password: this.$store.state.user.password,
+            token: this.$store.state.user.token,
+            post_path: this.$route.params.get_post_with_path,
+          })
+          .then((response) => {
+            if (response != undefined && response != '') {
+              switch (response.data.code) {
+                case 200:
+                  if (response.data.message == 'liked') {
+                    this.$set(this.$data, 'post_liked', true)
+                  } else {
+                    this.$set(this.$data, 'post_liked', false)
+                  }
+                  this.updateLikeData()
+                  break
+                case 503:
+                  this.alert(
+                    'خطایی در سمت سرور رخ داده لطفا چند ثانیه بعد امتحان کنید...'
+                  )
+                  break
+                case 401 || 400 || 404:
+                  this.$nuxt.$options.router.push('/signin')
+                  break
+              }
+            }
+          })
       }
-      this.$data.post_liked = true
     },
   },
 }

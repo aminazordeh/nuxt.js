@@ -219,47 +219,8 @@ export default {
                   .then((response) => {
                     switch (response.data.code) {
                       case 200:
-                        axios
-                          .post(
-                            configs.api_server_address +
-                              '/users/send/email/verification',
-                            {
-                              email: this.$data.email,
-                              token: this.$data.google_recaptcha_token,
-                            }
-                          )
-                          .then((response) => {
-                            switch (response.data.code) {
-                              case 200:
-                                this.$data.verify_your_email_page_show = true
-                                this.$data.submit_button_loading_sate = false
-                                break
-                              case 404:
-                                this.set_alert_data(
-                                  'خطایی در سمت سرور رخ داده است... ثبت کاربر امکان پذیر نیست... دوباره تلاش کنید.'
-                                )
-                                this.$data.verify_your_email_page_show = false
-                                this.$data.submit_button_loading_sate = false
-                                break
-                              case 400:
-                                this.set_alert_data(
-                                  'فیلد ها صحیح نمی باشد. یا خطایی در سمت سرور رخ داده است.'
-                                )
-                                this.$data.submit_button_loading_sate = false
-                                break
-                              case 500:
-                                this.set_alert_data(
-                                  'خطا در ارسال تایید ایمیل... با پشتیبانی تماس بگیرید...'
-                                )
-                                this.$data.submit_button_loading_sate = false
-                                break
-                            }
-                          })
-                          .catch((error) => {
-                            this.set_alert_data(
-                              'خطای در برقراری ارتباط با سرور.'
-                            )
-                          })
+                        this.$data.verify_your_email_page_show = true
+                        this.$data.submit_button_loading_sate = false
                         break
                       case 500:
                         this.set_alert_data('خطایی در سمت سرور رخ داده است.')

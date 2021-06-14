@@ -157,7 +157,7 @@ export default {
               case 200:
                 this.$store.commit('setUser', {
                   email: saved__user.email,
-                  password: saved__user.email,
+                  password: saved__user.password,
                   token: saved__user.token,
                   remember_me: true,
                 })
