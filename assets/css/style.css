@@ -98,8 +98,7 @@ ul {
   display: block;
   height: 45px;
   border: none;
-  border-radius: 50px;
-  border-top-right-radius: 6px;
+  border-radius: 3px;
   background-color: rgb(241, 241, 241);
   padding: 0 15px;
   font-family: 'Ubuntu', 'Samim';
@@ -108,10 +107,12 @@ ul {
   transition: 0.4s ease;
 }
 .input.border-input {
-  border-radius: 30px;
-  height: 50px;
-  font-size: 15px;
-  font-family: 'Roboto', 'Vazir';
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.input.border-input:focus {
+  background-color: #fff;
+  border-color: rgb(172, 172, 172);
 }
 .input-label {
   position: relative;
@@ -152,12 +153,12 @@ ul {
 }
 .input-checkbox .checkmark {
   position: absolute;
-  top: 0;
+  top: 2px;
   left: 0;
   height: 25px;
   width: 25px;
   background-color: #eee;
-  border-radius: 7px;
+  border-radius: 3px;
   transition: 0.3s ease;
 }
 .input-checkbox .cont:hover input ~ .checkmark {
@@ -165,6 +166,11 @@ ul {
 }
 .input-checkbox .cont input:checked ~ .checkmark {
   background-color: var(--gen-color);
+}
+textarea.input {
+  resize: vertical;
+  padding: 6px 12px;
+  min-height: 70px;
 }
 .checkmark:after {
   content: '';
@@ -211,7 +217,7 @@ ul {
   height: 45px;
   font-size: 15px;
   background-color: var(--gen-color);
-  border-radius: 30px;
+  border-radius: 3px;
   color: #fff;
   transition: 0.4s ease;
   border: 1px solid var(--gen-color);
@@ -351,7 +357,7 @@ body {
   height: 100%;
   justify-content: flex-start;
   padding: 0 10px;
-  padding-top: 25px;
+  padding-top: 5px;
 }
 #headerTop .Navbar-Link.Navbar-Link-Active {
   color: var(--gen-color);
@@ -1169,53 +1175,6 @@ body {
 .img-loader img.loaded {
   opacity: 1;
 }
-.search-bar {
-  position: relative;
-  left: 50%;
-  transform: translate(-50%);
-  display: block;
-  width: 90%;
-  background-color: rgb(241, 241, 241);
-  border-radius: 50px;
-  height: 50px;
-}
-.search-bar input,
-.search-bar .input {
-  position: absolute;
-  right: 0;
-  z-index: 2;
-  width: calc(100% - 55px);
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-}
-.search-bar .search-bar-go {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  padding: 0 14px;
-  padding-right: 8px;
-  padding-top: 3px;
-  width: 55px;
-  height: auto;
-  border-bottom-left-radius: 50px;
-  border-top-left-radius: 50px;
-  background-color: rgb(241, 241, 241);
-  border: none;
-  outline: none;
-  color: #777;
-  cursor: pointer;
-  z-index: 20;
-}
-.search-bar .search-bar-go,
-.search-bar .input {
-  transition: 0.3s ease;
-}
-.search-bar:focus > .search-bar-go,
-.search-bar:focus > .search-bar .input,
-.search-bar .input:focus ~ .search-bar-go,
-.search-bar .search-bar-go ~ .search-bar .input {
-  background-color: rgb(231, 231, 231);
-}
 .button_loading_state {
   display: flex;
   align-items: center;
@@ -1276,4 +1235,60 @@ body {
     right: 0;
     bottom: 0;
   }
+}
+.comments {
+  width: 100%;
+  display: block;
+  margin-bottom: 70px;
+}
+.comment {
+  position: relative;
+  width: 100%;
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 25px 15px;
+  padding-bottom: 13px;
+  text-align: right;
+  direction: rtl;
+  margin: 18px 0;
+}
+.comment.my_comment {
+  border-right: 3px solid var(--gen-color);
+}
+.comment .comment_sender {
+  position: absolute;
+  top: -15px;
+  color: #111;
+  font-family: 'Ubuntu', 'Samim2';
+  background-color: #fff;
+  padding: 5px 3px;
+}
+.comment .comment_content {
+  color: #555;
+}
+.comment .comment_reply {
+  margin-top: 20px;
+  padding-right: 20px;
+}
+.comment .comment_buttons {
+  position: absolute;
+  left: 13px;
+  bottom: -8px;
+  user-select: none;
+}
+.comment .comment_buttons .comment_button {
+  background-color: #fff;
+  padding: 0px 6px;
+  color: #555;
+  font-size: 14px;
+  font-family: 'Quicksand', 'Vazir';
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+.comment_send_reply_section {
+  margin-top: 5px;
+  margin-bottom: 10px;
 }

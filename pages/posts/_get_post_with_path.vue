@@ -1,5 +1,5 @@
 <template>
-  <div id="get_post_with_path">
+  <div style="user-select: text" id="get_post_with_path">
     <div v-if="post != undefined" class="container text-right mt-5" dir="rtl">
       <h1 class="header header-large" style="font-weight: 600">
         {{ post.post_header }}
@@ -17,6 +17,7 @@
       >
         <button
           style="
+            user-select: none;
             padding: 5px 0px;
             border-radius: 0;
             background: transparent;
@@ -69,6 +70,33 @@
         </button>
       </div>
       <div class="pt-2 w-100 d-block" v-html="post.post_content"></div>
+      <hr class="circle-hr" />
+      <div class="comments">
+        <div class="header samimvazir">نظرات کاربران</div>
+        <small style="color: #333">73 نظر</small>
+        <div class="mt-3 mb-4">
+          <div style="user-select: none">
+            <textarea
+              class="input border-input"
+              type="text"
+              placeholder="نظر شما..."
+              dir="rtl"
+            ></textarea>
+            <button class="dvsp-button mt-2" style="border-radius: 3px">
+              ارسال
+            </button>
+          </div>
+        </div>
+        <div class="w-100 d-block mt-4">
+          <div v-for="comment in comments" :key="comment.message_id">
+            <comment
+              :comment="comment"
+              :comments="comments"
+              :last_comment="false"
+            ></comment>
+          </div>
+        </div>
+      </div>
     </div>
     <div
       v-else-if="post == undefined || (post == null && alert._text != '')"
@@ -84,19 +112,54 @@
 <script>
 import configs from '../../assets/js/configs'
 import axios from 'axios'
+import comment from '../../components/comment.vue'
 
 export default {
+  components: {
+    comment,
+  },
   data() {
     return {
-      post_liked: false,
       post: undefined,
-      post_like_button_loading_state: false,
       alert: {
         _text: '',
         _color: '#777',
       },
+      post_liked: false,
+      post_like_button_loading_state: false,
       you_are_liked_this_post: 'undefined',
       saved__user_email: this.$store.state.user.email,
+      comments: [
+        {
+          message_id: 'message1',
+          sender_id: 'messager1',
+          content: 'کامنت تستی ۱',
+          replies: [
+            {
+              message_id: 'message4',
+              sender_id: 'messager4',
+              content: 'حداکثر تعداد کامنت ها را تنها بک اند تایین میکند...',
+              replies: [],
+              show_reply_message: false,
+            },
+          ],
+          show_reply_message: false,
+        },
+        {
+          message_id: 'message2',
+          sender_id: 'messager2',
+          content: 'کامنت تستی 2',
+          replies: [],
+          show_reply_message: false,
+        },
+        {
+          message_id: 'message3',
+          sender_id: 'messager3',
+          content: 'کامنت تستی 3',
+          replies: [],
+          show_reply_message: false,
+        },
+      ],
     }
   },
   watch: {
@@ -238,6 +301,6 @@ export default {
 
 <style>
 #like_button_loading::after {
-  border-top-color: #111;
+  border-top-color: var(--gen-color);
 }
 </style>
