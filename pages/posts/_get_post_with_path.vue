@@ -34,7 +34,7 @@
           >
           <div class="d-inline-block" style="position: relative; top: 3px">
             <svg
-              v-if="this.post_liked == false"
+              v-if="this.post_liked == false || this.post_liked == ''"
               xmlns="http://www.w3.org/2000/svg"
               class="ionicon"
               viewBox="0 0 512 512"
@@ -127,7 +127,7 @@ export default {
       },
       post_liked: false,
       post_like_button_loading_state: false,
-      you_are_liked_this_post: 'undefined',
+      you_are_liked_this_post: '',
       saved__user_email: this.$store.state.user.email,
       comments: [
         {
@@ -218,6 +218,8 @@ export default {
               : undefined,
           })
           .then((response) => {
+            console.log("Email ", this.$store.state.user.email);
+            console.log(response);
             this.$set(this.$data, 'post_like_button_loading_state', false)
             if (response.status == 200) {
               if (
@@ -230,7 +232,7 @@ export default {
                   'post_likes',
                   response.data.data.post_likes
                 )
-                if (response.data.data.you_are_liked_this_post == true) {
+                if (response.data.data.you_are_liked_this_post == true && response.data.data.you_are_liked_this_post != '') {
                   this.$set(this.$data, 'post_liked', true)
                 } else {
                   this.$set(this.$data, 'post_liked', false)
