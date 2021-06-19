@@ -233,7 +233,6 @@ export default {
                         this.$data.submit_button_loading_sate = false
                         break
                       case 409:
-                        console.log(response.data)
                         if (
                           response.data.message ==
                           'an user exist with this email'

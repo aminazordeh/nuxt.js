@@ -88,7 +88,7 @@
           </div>
         </div>
         <div class="w-100 d-block mt-4">
-          <div v-for="comment in comments" :key="comment.message_id">
+          <div v-for="comment in comments" :key="comment.comment_id">
             <comment
               :comment="comment"
               :comments="comments"
@@ -129,37 +129,7 @@ export default {
       post_like_button_loading_state: false,
       you_are_liked_this_post: '',
       saved__user_email: this.$store.state.user.email,
-      comments: [
-        {
-          message_id: 'message1',
-          sender_id: 'messager1',
-          content: 'کامنت تستی ۱',
-          replies: [
-            {
-              message_id: 'message4',
-              sender_id: 'messager4',
-              content: 'حداکثر تعداد کامنت ها را تنها بک اند تایین میکند...',
-              replies: [],
-              show_reply_message: false,
-            },
-          ],
-          show_reply_message: false,
-        },
-        {
-          message_id: 'message2',
-          sender_id: 'messager2',
-          content: 'کامنت تستی 2',
-          replies: [],
-          show_reply_message: false,
-        },
-        {
-          message_id: 'message3',
-          sender_id: 'messager3',
-          content: 'کامنت تستی 3',
-          replies: [],
-          show_reply_message: false,
-        },
-      ],
+      comments: [],
     }
   },
   watch: {
@@ -187,6 +157,7 @@ export default {
             response.data.code == 200
           ) {
             this.$set(this.$data, 'post', response.data.data)
+            this.$set(this.$data, 'comments', response.data.data.post_comments)
           } else if (
             response.data.status == 404 ||
             response.data.message == 'post not found'
@@ -218,8 +189,6 @@ export default {
               : undefined,
           })
           .then((response) => {
-            console.log("Email ", this.$store.state.user.email);
-            console.log(response);
             this.$set(this.$data, 'post_like_button_loading_state', false)
             if (response.status == 200) {
               if (
@@ -232,7 +201,10 @@ export default {
                   'post_likes',
                   response.data.data.post_likes
                 )
-                if (response.data.data.you_are_liked_this_post == true && response.data.data.you_are_liked_this_post != '') {
+                if (
+                  response.data.data.you_are_liked_this_post == true &&
+                  response.data.data.you_are_liked_this_post != ''
+                ) {
                   this.$set(this.$data, 'post_liked', true)
                 } else {
                   this.$set(this.$data, 'post_liked', false)

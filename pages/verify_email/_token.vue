@@ -661,7 +661,6 @@ export default {
         verification_token: this.$route.params.token,
       })
       .then((response) => {
-        console.log(response.data)
         switch (response.data.code) {
           case 200:
             this.$set(this.$data, 'email_verified', true)
